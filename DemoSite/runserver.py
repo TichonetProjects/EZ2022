@@ -6,12 +6,11 @@ from os import environ
 from DemoSite import app
 import sqlite3
 
-def create_connection(db_file):
-    """ create a database connection to a SQLite database """
+def first_connection(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print("Connection is being made!")
+        print("Can connect to the server!")
 
         cursor = conn.cursor()
 
@@ -19,14 +18,17 @@ def create_connection(db_file):
                       (name text, email text, username text,  pass text)''')
         conn.commit()
     
-    finally:
         for row in cursor.execute('SELECT * FROM users ORDER BY name'):
             print(row)
 
+        conn.close()
+    
+    finally:
+        pass
 
 
 if __name__ == '__main__':
-    create_connection(r"database.db")
+    first_connection(r"database.db")
     HOST = environ.get('SERVER_HOST', 'localhost')
     try:
         PORT = int(environ.get('SERVER_PORT', '5555'))
