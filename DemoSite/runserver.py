@@ -9,7 +9,7 @@ import sqlite3
 def first_connection(db_file):
     conn = None
     try:
-        conn = sqlite3.connect(db_file)
+        conn =  sqlite3.connect(db_file)
         print("Can connect to the server!")
 
         cursor = conn.cursor()

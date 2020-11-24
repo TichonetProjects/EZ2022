@@ -90,8 +90,6 @@ def redirection():
     except Error as e:
         print(e)
     finally:
-        for row in cursor.execute('SELECT * FROM users ORDER BY name'):
-             print(row)
 
         if success:
             return redirect(url_for('profile'))
