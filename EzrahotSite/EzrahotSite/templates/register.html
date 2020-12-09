@@ -5,12 +5,12 @@
 <div class="app">
     <form method="POST" action="{{ url_for('redirection') }}">
         <div class="form-group">
-            <label for="name">שם מלא</label>
-            <input type="text" class="form-control" name="name" />
+            <label for="first_name">שם פרטי</label>
+            <input type="text" class="form-control" name="first_name" />
         </div>
         <div class="form-group">
-            <label for="username">שם משתמש</label>
-            <input type="text" class="form-control" name="username">
+            <label for="last_name">שם משפחה</label>
+            <input type="text" class="form-control" name="last_name">
         </div>
         <div class="form-group">
             <label for="email">כתובת מייל</label>
@@ -19,6 +19,10 @@
         <div class="form-group">
             <label for="password">סיסמה</label>
             <input type="password" class="form-control" name="password">
+        </div>
+        <div class="form-group">
+            <label for="school_class">כיתה</label>
+            <input type="text" class="form-control" name="school_class">
         </div>
         <button type="submit" class="btn btn-primary">הירשם</button><br />
         <small class="text-muted">יש לך כבר חשבון? <a href="{{ url_for('login')}}">לחץ כאן להתחברות</a></small>

@@ -12,6 +12,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from EzrahotSite.models import User
 
 
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -61,46 +62,29 @@ def register():
         message='Resgister Page.'
     )
 
-@app.route('/redirection', methods=['POST'])
+@app.route('/redirection', methods=['GET', 'POST'])
 def redirection():
-    name = request.form.get("name")
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
     email = request.form.get("email")
-    username = request.form.get("username")
     password = request.form.get("password")
+    school_class = request.form.get("school_class")
     try:
-        conn = sqlite3.connect(r"database.db")
-        print("Connection is being made!")
-        cursor = conn.cursor()
-        cursor.execute('SELECT EXISTS(SELECT 1 FROM users WHERE username=?);', (username,))
+    
+
+        new_user = User(user_id = 1, first_name = first_name, last_name = last_name, email = email, password = password, school_class = school_class, user_type = "Waiting_For_Accept" )
         
-        if cursor.fetchone()[0] == 0:
-            cursor.execute("INSERT INTO users VALUES (?, ?, ?, ?)", (name, email, username, password))
-            success = True
-        else:
-            print("this user already exists!")
-            success = False
-            return render_template(
-             'error.html',
-            title='Error',
-            year=datetime.now().year,
-            message='Error Page.',
-            error='משתמש עם שם משתמש זהה קיים כבר. אנא נסה שם משתמש אחר.'
-             )
-
-        conn.commit()
-        conn.close()
-
+        db.session.add(new_user)
+        db.session.commit()
     except Error as e:
-        print(e)
+         print(e)
     finally:
-
-        if success:
-            return redirect(url_for('profile'))
+        return redirect(url_for('home'))
 
 
 
 @app.route('/profile')
-# @login_required
+@login_required
 def profile():
         return render_template(
         'profile.html',
