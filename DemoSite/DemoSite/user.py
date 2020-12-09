@@ -1,6 +1,6 @@
 from database import Database
 
-class User(Database):
+class User():
 
     db = Database.getInstance().getConnection()
     

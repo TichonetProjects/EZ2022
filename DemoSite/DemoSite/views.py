@@ -7,6 +7,7 @@ from flask import render_template, request, redirect, url_for
 from DemoSite import app
 import sqlite3
 from sqlite3 import Error
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route('/')
@@ -97,6 +98,7 @@ def redirection():
 
 
 @app.route('/profile')
+# @login_required
 def profile():
         return render_template(
         'profile.html',
