@@ -4,12 +4,14 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for
-from EzrahotSite import app, db
+from EzrahotSite import app, db, bcrypt
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
 from EzrahotSite.models import User
+
+from EzrahotSite.forms import RegistrationForm
 
 
 
@@ -55,11 +57,13 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+        form = RegistrationForm()
         return render_template(
         'register.html',
         title='Register',
         year=datetime.now().year,
-        message='Resgister Page.'
+        message='Resgister Page.',
+        form = form
     )
 
 @app.route('/redirection', methods=['GET', 'POST'])
