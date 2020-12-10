@@ -1,20 +1,30 @@
 from EzrahotSite import db, login_manager
 
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
+class RegisterForm(FlaskForm):
+    
+    first_name = StringField('first_name', validators=[DataRequired()])
+    last_name = StringField('last_name', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired()])
+
+    school_class = StringField('school_class', validators=[DataRequired()])
+
+class LoginForm(FlaskForm):
+    pass
 
 class User(db.Model):
     
     # PRIMARY KEY
     user_id = db.Column(db.Integer, primary_key=True)
 
-    first_name = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
-
-    school_class = db.Column(db.String, nullable=False)
     user_type = db.Column(db.String, nullable=False)
 
 
@@ -24,7 +34,7 @@ class User(db.Model):
 
     def get_id(self):
         """Return the email address to satisfy Flask-Login's requirements."""
-        return self.email
+        return self.user_id
 
     def is_authenticated(self):
         """Return True if the user is authenticated."""
