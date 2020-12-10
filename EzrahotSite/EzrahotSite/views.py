@@ -3,7 +3,7 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from EzrahotSite import app, db, bcrypt
 import sqlite3
 from sqlite3 import Error
@@ -11,8 +11,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 from EzrahotSite.models import User
 
-from EzrahotSite.forms import RegistrationForm
+from EzrahotSite.forms import RegistrationForm, LoginForm
 
+import random
 
 
 @app.route('/')
@@ -45,19 +46,23 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    """Renders the login page."""
-    return render_template(
-        'login.html',
-        title='Login',
-        year=datetime.now().year,
-        message='Login Page.'
-    )
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+        if current_user.is_authenticated:
+            return redirect(url_for('home'))
         form = RegistrationForm()
+        if form.validate_on_submit():
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user = User(user_id=random.randint(1, 1000000), first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password, school_class=form.school_class.data, user_type="Wating_For_Aprrove")
+
+            db.session.add(user)
+            db.session.commit()
+
+            flash('המשתמש נוצר בהצלחה. המתן לאישורו, לאחר האישור יהיה ניתן להתחבר עם המשתמש לאתר.', 'success')
+
+            return redirect(url_for('login'))
+            
         return render_template(
         'register.html',
         title='Register',
@@ -66,26 +71,26 @@ def register():
         form = form
     )
 
-@app.route('/redirection', methods=['GET', 'POST'])
-def redirection():
-    first_name = request.form.get("first_name")
-    last_name = request.form.get("last_name")
-    email = request.form.get("email")
-    password = request.form.get("password")
-    school_class = request.form.get("school_class")
-    try:
-    
-
-        new_user = User(user_id = 1, first_name = first_name, last_name = last_name, email = email, password = password, school_class = school_class, user_type = "Waiting_For_Accept" )
-        
-        db.session.add(new_user)
-        db.session.commit()
-    except Error as e:
-         print(e)
-    finally:
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
         return redirect(url_for('home'))
-
-
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user != None and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('home'))
+        else:
+            flash('ההתחברות נכשלה. אנא נסה שוב', 'danger')
+    return render_template(
+        'login.html',
+        title='Login',
+        year=datetime.now().year,
+        message='Login Page.',
+        form=form
+    )
 
 @app.route('/profile')
 @login_required
@@ -96,3 +101,8 @@ def profile():
         year=datetime.now().year,
         message='Profile Page.',
     )
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))

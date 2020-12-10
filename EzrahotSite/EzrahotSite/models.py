@@ -8,29 +8,29 @@ from wtforms.validators import DataRequired
 def load_user(user_id):
     return User.query.get(user_id)
 
-class RegisterForm(FlaskForm):
-    
-    first_name = StringField('first_name', validators=[DataRequired()])
-    last_name = StringField('last_name', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired()])
-    password = StringField('password', validators=[DataRequired()])
-
-    school_class = StringField('school_class', validators=[DataRequired()])
-
-class LoginForm(FlaskForm):
-    pass
 
 class User(db.Model):
     
     # PRIMARY KEY
     user_id = db.Column(db.Integer, primary_key=True)
+    
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    
+    school_class = db.Column(db.String, nullable=False)
 
     user_type = db.Column(db.String, nullable=False)
 
 
+
     def is_active(self):
         """True, as all users are active."""
-        return True
+        if User.query.get(user_type) != "Wating_For_Approve":
+            return True
+        else:
+            return False
 
     def get_id(self):
         """Return the email address to satisfy Flask-Login's requirements."""

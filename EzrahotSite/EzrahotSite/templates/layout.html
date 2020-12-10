@@ -25,8 +25,13 @@
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                    <li><a href="{{ url_for('login')}}"> Login</a></li>
-                    <li><a href="{{ url_for('register')}}">Register</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                  {% else %}
+                  <li><a href="{{ url_for('login') }}">Login</a></li>
+                  <li><a href="{{ url_for('register') }}">Register</a></li>
+                  {% endif %}
                 </ul>
             </div>
         </div>
@@ -37,6 +42,15 @@
         <img id="spinner" src="../static/img/spiner.png" />
 
         <div style="display:none" class="container body-content" id="content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
             {% block content %}{% endblock %}
             <hr />
             <footer>

@@ -19,4 +19,12 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError('That email is taken. Please choose a different one.')
+            raise ValidationError('כתובת המייל הזאת כבר בשימוש. אנא השתמש בכתובת מייל אחרת.')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('אימייל',
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('סיסמה', validators=[DataRequired()])
+    remember = BooleanField('זכור אותי')
+    submit = SubmitField('התחבר')
