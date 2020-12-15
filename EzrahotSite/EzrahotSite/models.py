@@ -43,3 +43,15 @@ class User(db.Model):
     def is_anonymous(self):
         return False
 
+
+class Article(db.Model):
+    article_id = db.Column(db.Integer, primary_key=True)
+    
+    heading = db.Column(db.String, nullable=False)
+    body = db.Column(db.String, nullable=False)
+    
+    post_date = db.Column(db.String, nullable=False)
+    accept_date = db.Column(db.String, nullable=False)
+
+    author_id = db.Column(db.Integer, nullable=False)
+    acceptor_id = db.Column(db.Integer, nullable=False)

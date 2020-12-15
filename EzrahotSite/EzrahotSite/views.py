@@ -4,7 +4,7 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash
-from EzrahotSite import app, db, bcrypt
+from EzrahotSite import app, db, bcrypt, md
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
@@ -45,6 +45,31 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+
+@app.route('/test')
+def test():
+    """Renders the about page."""
+
+    test_text =  '''
+    #test1
+
+    1
+    2
+    3
+
+    ##d
+    '''
+    
+
+
+    return render_template(
+        'about.html',
+        title='About',
+        year=datetime.now().year,
+        message='Your application description page.',
+        html=md.render(test_text)
+        )
 
 
 @app.route('/register', methods=['GET', 'POST'])
