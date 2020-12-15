@@ -27,10 +27,8 @@ class User(db.Model):
 
     def is_active(self):
         """True, as all users are active."""
-        if User.query.get(user_type) != "Wating_For_Approve":
-            return True
-        else:
-            return False
+        return not self.user_type == "Wating_For_Aprrove"
+            
 
     def get_id(self):
         """Return the email address to satisfy Flask-Login's requirements."""

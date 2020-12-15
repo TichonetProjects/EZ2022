@@ -4,7 +4,7 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash
-from EzrahotSite import app, db, bcrypt, md
+from EzrahotSite import app, db, bcrypt #, md
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
@@ -47,29 +47,29 @@ def about():
     )
 
 
-@app.route('/test')
-def test():
-    """Renders the about page."""
+# @app.route('/test')
+# def test():
+#     """Renders the about page."""
 
-    test_text =  '''
-    #test1
+#     test_text =  '''
+#     #test1
 
-    1
-    2
-    3
+#     1
+#     2
+#     3
 
-    ##d
-    '''
+#     ##d
+#     '''
     
 
 
-    return render_template(
-        'about.html',
-        title='About',
-        year=datetime.now().year,
-        message='Your application description page.',
-        html=md.render(test_text)
-        )
+#     return render_template(
+#         'about.html',
+#         title='About',
+#         year=datetime.now().year,
+#         message='Your application description page.',
+#         html=md.render(test_text)
+#         )
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -103,10 +103,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user != None and bcrypt.check_password_hash(user.password, form.password.data):
+        if user != None and bcrypt.check_password_hash(user.password, form.password.data) and user.is_active():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
+        elif not user.is_active():
+            flash('המשתמש הזה עדיין לא אושר על ידי מנהל. נסה שוב מאוחר יותר', 'danger')
         else:
             flash('ההתחברות נכשלה. אנא נסה שוב', 'danger')
     return render_template(
