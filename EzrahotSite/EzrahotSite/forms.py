@@ -28,3 +28,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('סיסמה', validators=[DataRequired()])
     remember = BooleanField('זכור אותי')
     submit = SubmitField('התחבר')
+
+# class SubmitArticle(FlaskForm):
+    

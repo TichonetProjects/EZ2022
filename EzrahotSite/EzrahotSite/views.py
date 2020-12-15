@@ -4,7 +4,7 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash
-from EzrahotSite import app, db, bcrypt #, md
+from EzrahotSite import app, db, bcrypt, md
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
@@ -13,7 +13,7 @@ from EzrahotSite.models import User
 
 from EzrahotSite.forms import RegistrationForm, LoginForm
 
-import random
+from flask_misaka import markdown
 
 
 @app.route('/')
@@ -47,29 +47,20 @@ def about():
     )
 
 
-# @app.route('/test')
-# def test():
-#     """Renders the about page."""
+@app.route('/test')
+def test():
+    """Renders the about page."""
 
-#     test_text =  '''
-#     #test1
+    test_text =  "## הנה זה טקסט בעברית! <br> ![alt text](https://github.com/laynH/Anime-Girls-Holding-Programming-Books/blob/master/C/Hakurei_Reimu_Holding_C_Programming_Language.jpg?raw=true)"
+   
 
-#     1
-#     2
-#     3
-
-#     ##d
-#     '''
-    
-
-
-#     return render_template(
-#         'about.html',
-#         title='About',
-#         year=datetime.now().year,
-#         message='Your application description page.',
-#         html=md.render(test_text)
-#         )
+    return render_template(
+        'about.html',
+        title='About',
+        year=datetime.now().year,
+        message='Your application description page.',
+        mkd_text=md.render(test_text)
+        )
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -133,3 +124,13 @@ def profile():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/submit-article')
+@login_required
+def submitArticle():
+    return render_template('submitArticle.html', year=datetime.now().year)
+
+@app.route('/control-panel')
+@login_required
+def controlPanel():
+    return render_template('controlPanel.html', year=datetime.now().year, inActiveUsers = md.render('<br>'.join([f"{user.first_name} {user.last_name}" for user in User.get_inactive_users()])))

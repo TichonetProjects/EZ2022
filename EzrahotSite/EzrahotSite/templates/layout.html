@@ -26,6 +26,10 @@
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
                     {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('submitArticle') }}">Submit Article</a></li>
+                    {% if current_user.is_admin() %}
+                    <li><a href="{{ url_for('controlPanel') }}">Control Panel</a></li>
+                    {% endif %}
                     <li><a href="{{ url_for('profile') }}">Profile</a></li>
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                   {% else %}
@@ -39,7 +43,7 @@
 
     <div class="main-div">
         
-        <img id="spinner" src="../static/img/spiner.png" />
+        <img class="spinner" id="spinner" src="../static/img/spiner.png" />
 
         <div style="display:none" class="container body-content" id="content">
             {% with messages = get_flashed_messages(with_categories=true) %}

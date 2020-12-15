@@ -10,8 +10,8 @@ def load_user(user_id):
 
 
 class User(db.Model):
-    
-    # PRIMARY KEY
+    __tablename__ = 'user'
+
     user_id = db.Column(db.Integer, primary_key=True)
     
     first_name = db.Column(db.String, nullable=False)
@@ -22,6 +22,8 @@ class User(db.Model):
     school_class = db.Column(db.String, nullable=False)
 
     user_type = db.Column(db.String, nullable=False)
+
+    # article = db.relationship("Article")
 
 
 
@@ -40,9 +42,21 @@ class User(db.Model):
 
     def is_anonymous(self):
         return False
+    
+    def is_admin(self):
+        return self.user_type == "Admin_User"
+
+    def get_inactive_users():
+        inactiveUsers = []
+        for users in db.session.query(User).all():
+            if not users.is_active():
+                inactiveUsers.append(users)
+        return inactiveUsers
 
 
 class Article(db.Model):
+    __tablename__ = 'article'
+
     article_id = db.Column(db.Integer, primary_key=True)
     
     heading = db.Column(db.String, nullable=False)
@@ -51,5 +65,5 @@ class Article(db.Model):
     post_date = db.Column(db.String, nullable=False)
     accept_date = db.Column(db.String, nullable=False)
 
-    author_id = db.Column(db.Integer, nullable=False)
-    acceptor_id = db.Column(db.Integer, nullable=False)
+    # author_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    # acceptor_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))

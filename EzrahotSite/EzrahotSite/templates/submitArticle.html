@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<head>
+    {{ simplemde.css }}
+    {{ simplemde.js }}
+</head>
+
+<body style="direction: rtl;">
+    <textarea>
+        </textarea>
+        {{ simplemde.load }}
+</body>
+
+{% endblock %}
