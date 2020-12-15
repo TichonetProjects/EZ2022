@@ -1,1 +1,5 @@
 Flask~=1.1
+flask-login
+flask-wtf
+flask-bcrypt
+flask-sqlalchemy
