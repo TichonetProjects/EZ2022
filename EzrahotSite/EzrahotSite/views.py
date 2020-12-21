@@ -3,15 +3,15 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, Response, abort
 from EzrahotSite import app, db, bcrypt, md
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
-from EzrahotSite.models import User
+from EzrahotSite.models import User, Article
 
-from EzrahotSite.forms import RegistrationForm, LoginForm
+from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
 from flask_misaka import markdown
 
@@ -125,12 +125,34 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/submit-article')
+@app.route('/submit-article', methods=['GET', 'POST'])
 @login_required
 def submitArticle():
-    return render_template('submitArticle.html', year=datetime.now().year)
+    form = SubmitArticle()
+    if form.validate_on_submit():
+        article = Article(heading=form.heading.data, body=form.body.data, post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), accept_date=None, is_accepted=False)
+
+        db.session.add(article)
+        db.session.commit()
+
+        flash('הפוסט נוצר בהצלחה וממתין לאישור מנהל.', 'success')
+
+        return redirect(url_for(article.article_id))
+
+    return render_template('submitArticle.html', year=datetime.now().year, form=form)
 
 @app.route('/control-panel')
 @login_required
 def controlPanel():
     return render_template('controlPanel.html', year=datetime.now().year, inActiveUsers = md.render('<br>'.join([f"{user.first_name} {user.last_name}" for user in User.get_inactive_users()])))
+
+@app.route('/article/<index>/')
+def articles(index):
+    article = Article.query.filter_by(article_id=index).first()
+    if article is None:
+        abort(404, description="Resource not found")
+    return render_template('articles.html', year=datetime.now().year, articleBody=md.render(article.body), articleHeading=article.heading)
+
+@app.errorhandler(404)
+def not_found(exc):
+    return Response(render_template('404.html', title="Page Not Found")), 404

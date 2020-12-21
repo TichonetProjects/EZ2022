@@ -63,7 +63,17 @@ class Article(db.Model):
     body = db.Column(db.String, nullable=False)
     
     post_date = db.Column(db.String, nullable=False)
-    accept_date = db.Column(db.String, nullable=False)
+    accept_date = db.Column(db.String, nullable=True)
+
+    is_accepted = db.Column(db.Boolean, nullable=False)
 
     # author_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     # acceptor_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+
+    def get_articles():
+        articlesList = []
+        for articles in db.session.query(Article).all()[:5]:
+            articlesList.append(articles)
+        return articlesList
+
+

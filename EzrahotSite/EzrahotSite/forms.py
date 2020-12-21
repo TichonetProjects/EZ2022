@@ -29,5 +29,11 @@ class LoginForm(FlaskForm):
     remember = BooleanField('זכור אותי')
     submit = SubmitField('התחבר')
 
-# class SubmitArticle(FlaskForm):
+class SubmitArticle(FlaskForm):
+    heading = StringField('כותרת',
+                            validators=[DataRequired()])
+    
+    body = StringField('תוכן הפוסט', 
+                        validators=[DataRequired()])
+    submit = SubmitField('שליחה')
     
