@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DemoSite", "DemoSite\DemoSite.pyproj", "{B60A9A16-2E54-447A-BE08-6FF88A5D2E91}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "EzrahotSite", "EzrahotSite\EzrahotSite.pyproj", "{9C0E2CF4-8759-4609-B73C-9B70C80C1B6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B60A9A16-2E54-447A-BE08-6FF88A5D2E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B60A9A16-2E54-447A-BE08-6FF88A5D2E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B60A9A16-2E54-447A-BE08-6FF88A5D2E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B60A9A16-2E54-447A-BE08-6FF88A5D2E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0E2CF4-8759-4609-B73C-9B70C80C1B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0E2CF4-8759-4609-B73C-9B70C80C1B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0E2CF4-8759-4609-B73C-9B70C80C1B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0E2CF4-8759-4609-B73C-9B70C80C1B6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E314202E-B42E-4C5F-9C6E-C98EE7EBD6C9}
+		SolutionGuid = {A84914BD-D0B2-4735-843A-E76462DEA49D}
 	EndGlobalSection
 EndGlobal

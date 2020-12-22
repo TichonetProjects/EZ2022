@@ -1,10 +1,9 @@
 """
-This script runs the DemoSite application using a development server.
+This script runs the EzrahotSite application using a development server.
 """
 
 from os import environ
 from EzrahotSite import app
-import sqlite3
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', 'localhost')
@@ -12,4 +11,4 @@ if __name__ == '__main__':
         PORT = int(environ.get('SERVER_PORT', '5555'))
     except ValueError:
         PORT = 5555
-    app.run(HOST, PORT, debug=True)
+    app.run(HOST, PORT)
