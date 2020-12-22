@@ -98,10 +98,11 @@ def login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
-        elif not user.is_active():
+        elif (not user == None) and not user.is_active():
             flash('המשתמש הזה עדיין לא אושר על ידי מנהל. נסה שוב מאוחר יותר', 'danger')
         else:
             flash('ההתחברות נכשלה. אנא נסה שוב', 'danger')
+
     return render_template(
         'login.html',
         title='Login',
@@ -137,7 +138,7 @@ def submitArticle():
 
         flash('הפוסט נוצר בהצלחה וממתין לאישור מנהל.', 'success')
 
-        return redirect(url_for(article.article_id))
+        return redirect(url_for('articles', index=article.article_id))
 
     return render_template('submitArticle.html', year=datetime.now().year, form=form)
 
@@ -149,8 +150,10 @@ def controlPanel():
 @app.route('/article/<index>/')
 def articles(index):
     article = Article.query.filter_by(article_id=index).first()
+    
     if article is None:
         abort(404, description="Resource not found")
+    
     return render_template('articles.html', year=datetime.now().year, articleBody=md.render(article.body), articleHeading=article.heading)
 
 @app.errorhandler(404)
