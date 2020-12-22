@@ -130,14 +130,14 @@ def logout():
 def submitArticle():
     form = SubmitArticle()
     if form.validate_on_submit():
-        article = Article(heading=form.heading.data, body=form.body.data, post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), accept_date=None, is_accepted=False)
+        article = Article(heading=form.heading.data, body=form.body.data, post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), accept_date=None, is_accepted=False, author_id=current_user.user_id)
 
         db.session.add(article)
         db.session.commit()
 
         flash('הפוסט נוצר בהצלחה וממתין לאישור מנהל.', 'success')
 
-        return redirect(url_for(article.article_id))
+        return redirect(url_for(f"article/{article.article_id}"))
 
     return render_template('submitArticle.html', year=datetime.now().year, form=form)
 
@@ -151,7 +151,8 @@ def articles(index):
     article = Article.query.filter_by(article_id=index).first()
     if article is None:
         abort(404, description="Resource not found")
-    return render_template('articles.html', year=datetime.now().year, articleBody=md.render(article.body), articleHeading=article.heading)
+    author = User.query.filter_by(user_id=article.author_id).first()
+    return render_template('articles.html', year=datetime.now().year, articleBody=md.render(article.body), articleHeading=article.heading, Articleauthor=f"{author.first_name} {author.last_name}")
 
 @app.errorhandler(404)
 def not_found(exc):

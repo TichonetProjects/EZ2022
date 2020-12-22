@@ -67,7 +67,7 @@ class Article(db.Model):
 
     is_accepted = db.Column(db.Boolean, nullable=False)
 
-    # author_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    author_id = db.Column(db.Integer, nullable=False)
     # acceptor_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
     def get_articles():
