@@ -4,7 +4,7 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash, Response, abort
-from EzrahotSite import app, db, bcrypt, md
+from EzrahotSite import app, db, bcrypt#, md
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
@@ -13,17 +13,18 @@ from EzrahotSite.models import User, Article
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
-from flask_misaka import markdown
+#from flask_misaka import markdown
 
 
 @app.route('/')
 @app.route('/home')
 def home():
-    """Renders the home page."""
+    acceptedArticles = Article.get_all_active()
     return render_template(
         'index.html',
         title='Home Page',
         year=datetime.now().year,
+        articles=acceptedArticles
     )
 
 @app.route('/contact')
@@ -146,7 +147,7 @@ def submitArticle():
 @app.route('/control-panel')
 @login_required
 def controlPanel():
-    return render_template('controlPanel.html', year=datetime.now().year, inActiveUsers = md.render('<br>'.join([f"{user.first_name} {user.last_name}" for user in User.get_inactive_users()])))
+    return render_template('controlPanel.html', year=datetime.now().year, inactiveUsers = User.get_all_inactive())
 
 @app.route('/article/<index>/')
 def articles(index):
@@ -155,7 +156,7 @@ def articles(index):
     if article is None:
         abort(404, description="Resource not found")
     author = User.query.filter_by(user_id=article.author_id).first()
-    return render_template('articles.html', year=datetime.now().year, articleBody=md.render(article.body), articleHeading=article.heading, Articleauthor=f"{author.first_name} {author.last_name}")
+    return render_template('articles.html', year=datetime.now().year, articleBody="")#md.render(article.body), articleHeading=article.heading, Articleauthor=f"{author.first_name} {author.last_name}")
 
 @app.errorhandler(404)
 def not_found(exc):

@@ -30,6 +30,9 @@ class User(db.Model):
     def is_active(self):
         """True, as all users are active."""
         return not self.user_type == "Wating_For_Aprrove"
+
+    def get_all_inactive():
+        return (User.query.filter_by(user_type = "Waiting_For_Aprrove"))
             
 
     def get_id(self):
@@ -75,5 +78,12 @@ class Article(db.Model):
         for articles in db.session.query(Article).all()[:5]:
             articlesList.append(articles)
         return articlesList
+
+    def is_active(self):
+        return self.is_accepted
+    
+    def get_all_active():
+        return (Article.query.filter_by(is_accepted=True))
+
 
 

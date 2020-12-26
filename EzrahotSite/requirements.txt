@@ -5,3 +5,4 @@ flask-bcrypt
 flask-sqlalchemy
 Flask-Misaka
 flask_simplemde
+email-validator
