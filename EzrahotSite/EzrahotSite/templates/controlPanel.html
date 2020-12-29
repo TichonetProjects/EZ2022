@@ -2,9 +2,30 @@
 
 {% block content %}
 
-{% for inactiveUser in inactiveUsers %}
-<h3>{{inactiveUser.first_name}} {{inactiveUser.last_name}}</h3>
-<br />
-{% endfor%}
+<div style="border-bottom: black 2px solid">
+    {% for inactiveUser in inactiveUsers %}
+    <h3>{{inactiveUser.first_name}} {{inactiveUser.last_name}}</h3>
+    <form action="/acceptuser/{{inactiveUser.user_id}}" method="post">
+        <button type="submit"><i class="fas fa-check"></i></button>
+    </form>
+    <form action="/deleteuser/{{inactiveUser.user_id}}" method="post">
+        <button type="submit"><i class="fas fa-times"></i></button>
+    </form>
+    <br />
+    {% endfor%}
+</div>
+<div>
+    {% for inactiveArticle in inactiveArticles %}
+    <a href="article/{{inactiveArticle.article_id}}"><h3>{{inactiveArticle.heading}}</h3></a>
+    <form action="/acceptarticle/{{inactiveArticle.article_id}}" method="post">
+        <button type="submit"><i class="fas fa-check"></i></button>
+    </form>
+    <form action="/deletearticle/{{inactiveArticle.article_id}}" method="post">
+        <button type="submit"><i class="fas fa-times"></i></button>
+    </form>
+    <br />
+    {% endfor%}
+</div>
+
 
 {% endblock %}

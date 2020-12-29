@@ -27,6 +27,7 @@ def home():
         articles=acceptedArticles
     )
 
+
 @app.route('/contact')
 def contact():
     """Renders the contact page."""
@@ -147,7 +148,43 @@ def submitArticle():
 @app.route('/control-panel')
 @login_required
 def controlPanel():
-    return render_template('controlPanel.html', year=datetime.now().year, inactiveUsers = User.get_all_inactive())
+    inactiveUsers = User.get_inactive_users()
+    inactiveArticles = Article.get_inactive_articles()
+    return render_template('controlPanel.html', year=datetime.now().year, inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
+
+# User Accept System
+@app.route("/acceptuser/<index>", methods=['GET', 'POST'])
+@login_required
+def acceptUser(index):
+    user = User.query.filter_by(user_id=index).first()
+    if not user is None:
+        user.acceptUser()
+    return redirect(url_for('controlPanel'))
+
+@app.route("/deleteuser/<index>", methods=['GET', 'POST'])
+@login_required
+def deleteUser(index):
+    user = User.query.filter_by(user_id=index).first()
+    if not user is None:
+        user.deleteUser()
+    return redirect(url_for('controlPanel'))
+
+# Article Accept System
+@app.route("/acceptarticle/<index>", methods=['GET', 'POST'])
+@login_required
+def acceptArticle(index):
+    article = Article.query.filter_by(article_id=index).first()
+    if not article is None:
+        article.acceptArticle()
+    return redirect(url_for('controlPanel'))
+
+@app.route("/deletearticle/<index>", methods=['GET', 'POST'])
+@login_required
+def deleteArticle(index):
+    article = Article.query.filter_by(article_id=index).first()
+    if not article is None:
+        article.deleteArticle()
+    return redirect(url_for('controlPanel'))
 
 @app.route('/article/<index>/')
 def articles(index):
@@ -161,3 +198,4 @@ def articles(index):
 @app.errorhandler(404)
 def not_found(exc):
     return Response(render_template('404.html', title="Page Not Found")), 404
+

@@ -3,6 +3,7 @@ from EzrahotSite import db, login_manager
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -50,11 +51,15 @@ class User(db.Model):
         return self.user_type == "Admin_User"
 
     def get_inactive_users():
-        inactiveUsers = []
-        for users in db.session.query(User).all():
-            if not users.is_active():
-                inactiveUsers.append(users)
-        return inactiveUsers
+        return (User.query.filter_by(user_type="Wating_For_Aprrove"))
+
+    def acceptUser(self):
+        self.user_type = "Normal_User"
+        db.session.commit()
+
+    def deleteUser(self):
+        db.session.delete(self)
+        db.session.commit()
 
 
 class Article(db.Model):
@@ -85,5 +90,16 @@ class Article(db.Model):
     def get_all_active():
         return (Article.query.filter_by(is_accepted=True))
 
+    def get_inactive_articles():
+        return (Article.query.filter_by(is_accepted=False))
+
+    def acceptArticle(self):
+        self.is_accepted = True
+        self.accept_date = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        db.session.commit()
+
+    def deleteArticle(self):
+        db.session.delete(self)
+        db.session.commit()
 
 
