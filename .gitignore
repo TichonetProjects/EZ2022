@@ -139,3 +139,5 @@ dmypy.json
 cython_debug/
 .vs/EzrahotSite/v16/.suo
 EzrahotSite/EzrahotSite.pyproj
+.vs/EzrahotSite/v16/.suo
+EzrahotSite/env1/Scripts/email_validator.exe
