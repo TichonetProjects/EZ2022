@@ -1,9 +1,13 @@
-from EzrahotSite import db, login_manager
+from EzrahotSite import db, login_manager, app
 
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
 from datetime import datetime
+from flask_login import current_user
+from functools import wraps
+from flask import request, redirect, url_for, flash
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -76,7 +80,7 @@ class Article(db.Model):
     is_accepted = db.Column(db.Boolean, nullable=False)
 
     author_id = db.Column(db.Integer, nullable=False)
-    # acceptor_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    acceptor_id = db.Column(db.Integer, nullable=True)
 
     def get_articles():
         articlesList = []
@@ -96,6 +100,7 @@ class Article(db.Model):
     def acceptArticle(self):
         self.is_accepted = True
         self.accept_date = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        self.acceptor_id = current_user.user_id
         db.session.commit()
 
     def deleteArticle(self):
@@ -103,3 +108,12 @@ class Article(db.Model):
         db.session.commit()
 
 
+def admin_required(func):
+
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        print(current_user.first_name)
+        if not current_user.is_admin():
+            return app.login_manager.unauthorized()
+        return func(*args, **kwargs)
+    return decorated_view

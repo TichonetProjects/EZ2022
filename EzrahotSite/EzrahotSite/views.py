@@ -9,7 +9,7 @@ import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
-from EzrahotSite.models import User, Article
+from EzrahotSite.models import User, Article, admin_required
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
@@ -147,6 +147,7 @@ def submitArticle():
 
 @app.route('/control-panel')
 @login_required
+@admin_required
 def controlPanel():
     inactiveUsers = User.get_inactive_users()
     inactiveArticles = Article.get_inactive_articles()
@@ -155,6 +156,7 @@ def controlPanel():
 # User Accept System
 @app.route("/acceptuser/<index>", methods=['GET', 'POST'])
 @login_required
+@admin_required
 def acceptUser(index):
     user = User.query.filter_by(user_id=index).first()
     if not user is None:
@@ -163,6 +165,7 @@ def acceptUser(index):
 
 @app.route("/deleteuser/<index>", methods=['GET', 'POST'])
 @login_required
+@admin_required
 def deleteUser(index):
     user = User.query.filter_by(user_id=index).first()
     if not user is None:
@@ -172,6 +175,7 @@ def deleteUser(index):
 # Article Accept System
 @app.route("/acceptarticle/<index>", methods=['GET', 'POST'])
 @login_required
+@admin_required
 def acceptArticle(index):
     article = Article.query.filter_by(article_id=index).first()
     if not article is None:
@@ -180,6 +184,7 @@ def acceptArticle(index):
 
 @app.route("/deletearticle/<index>", methods=['GET', 'POST'])
 @login_required
+@admin_required
 def deleteArticle(index):
     article = Article.query.filter_by(article_id=index).first()
     if not article is None:
