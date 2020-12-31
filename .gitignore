@@ -137,3 +137,5 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+.vs/EzrahotSite/v16/.suo
+EzrahotSite/EzrahotSite.pyproj
