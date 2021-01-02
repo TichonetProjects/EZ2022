@@ -19,7 +19,9 @@ from flask_misaka import markdown
 @app.route('/')
 @app.route('/home')
 def home():
-    acceptedArticles = Article.get_all_active()
+    """renders the home page with all accepted articles"""
+    acceptedArticles = Article.get_all_accepted()
+
     return render_template(
         'index.html',
         title='Home Page',
@@ -30,7 +32,7 @@ def home():
 
 @app.route('/contact')
 def contact():
-    """Renders the contact page."""
+    """renders the contact page."""
     return render_template(
         'contact.html',
         title='Contact',
@@ -40,29 +42,25 @@ def contact():
 
 @app.route('/about')
 def about():
-    """Renders the about page."""
+    """renders the about page."""
     return render_template(
         'about.html',
         title='About',
         year=datetime.now().year,
         message='Your application description page.',
-        mkd_text=""
     )
 
 
 @app.route('/test')
 def test():
-    """Renders the about page."""
-
-    test_text =  "## הנה זה טקסט בעברית! <br> ![alt text](https://github.com/laynH/Anime-Girls-Holding-Programming-Books/blob/master/C/Hakurei_Reimu_Holding_C_Programming_Language.jpg?raw=true)"
-   
+    """renders the test page."""
+    """currently empty"""
 
     return render_template(
         'about.html',
         title='About',
         year=datetime.now().year,
         message='Your application description page.',
-        mkd_text=md.render(test_text)
         )
 
 
@@ -70,10 +68,17 @@ def test():
 def register():
         if current_user.is_authenticated:
             return redirect(url_for('home'))
+        
         form = RegistrationForm()
         if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-            user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password, school_class=form.school_class.data, user_type="Wating_For_Aprrove")
+            user = User(
+                first_name=form.first_name.data, 
+                last_name=form.last_name.data, 
+                email=form.email.data, 
+                password=hashed_password, 
+                school_class=form.school_class.data, 
+                user_type="NOT_APPROVED")
 
             db.session.add(user)
             db.session.commit()
@@ -94,14 +99,17 @@ def register():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user != None and bcrypt.check_password_hash(user.password, form.password.data) and user.is_active():
+
+        if user and user.is_active() and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
-        elif (not user == None) and not user.is_active():
+
+        elif user and not user.is_active():
             flash('המשתמש הזה עדיין לא אושר על ידי מנהל. נסה שוב מאוחר יותר', 'danger')
         else:
             flash('ההתחברות נכשלה. אנא נסה שוב', 'danger')
@@ -134,7 +142,13 @@ def logout():
 def submitArticle():
     form = SubmitArticle()
     if form.validate_on_submit():
-        article = Article(heading=form.heading.data, body=form.body.data, post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), accept_date=None, is_accepted=False, author_id=current_user.user_id)
+        article = Article(
+            heading=form.heading.data,
+            body=form.body.data,
+            post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
+            accept_date=None,
+            is_accepted=False,
+            author_id=current_user.get_id())
 
         db.session.add(article)
         db.session.commit()
@@ -149,58 +163,77 @@ def submitArticle():
 @login_required
 @admin_required
 def controlPanel():
-    inactiveUsers = User.get_inactive_users()
-    inactiveArticles = Article.get_inactive_articles()
+    inactiveUsers = User.get_all_inactive()
+    inactiveArticles = Article.get_all_unaccepted()
+
     return render_template('controlPanel.html', year=datetime.now().year, inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
 
-# User Accept System
+
+"""
+accept system stuff
+"""
 @app.route("/acceptuser/<index>", methods=['GET', 'POST'])
 @login_required
 @admin_required
 def acceptUser(index):
-    user = User.query.filter_by(user_id=index).first()
-    if not user is None:
-        user.acceptUser()
+    user = User.query.get(index)
+    
+    if user:
+        user.accept_user()
+    
     return redirect(url_for('controlPanel'))
 
 @app.route("/deleteuser/<index>", methods=['GET', 'POST'])
 @login_required
 @admin_required
 def deleteUser(index):
-    user = User.query.filter_by(user_id=index).first()
-    if not user is None:
-        user.deleteUser()
+    user = User.query.get(index)
+
+    if user:
+        user.delete_user()
+
     return redirect(url_for('controlPanel'))
 
-# Article Accept System
 @app.route("/acceptarticle/<index>", methods=['GET', 'POST'])
 @login_required
 @admin_required
 def acceptArticle(index):
-    article = Article.query.filter_by(article_id=index).first()
-    if not article is None:
-        article.acceptArticle()
+    article = Article.query.get(index)
+
+    if article:
+        article.accept_article()
+
     return redirect(url_for('controlPanel'))
 
 @app.route("/deletearticle/<index>", methods=['GET', 'POST'])
 @login_required
 @admin_required
 def deleteArticle(index):
-    article = Article.query.filter_by(article_id=index).first()
-    if not article is None:
-        article.deleteArticle()
+    article = Article.query.get(index)
+
+    if article:
+        article.delete_article()
+
     return redirect(url_for('controlPanel'))
 
 @app.route('/article/<index>/')
 def articles(index):
-    article = Article.query.filter_by(article_id=index).first()
+    article = Article.query.get(index)
     
-    if article is None:
+    if not article:
         abort(404, description="Resource not found")
-    author = User.query.filter_by(user_id=article.author_id).first()
-    return render_template('articles.html', year=datetime.now().year, articleBody=md.render(article.body), articleHeading=article.heading, Articleauthor=f"{author.first_name} {author.last_name}")
+    
+    elif not article.is_accepted:
+        if not (current_user.is_authenticated and (current_user.user_id == article.author_id or current_user.is_admin())):
+            abort(404, description="Resource not found")
+
+    author = User.query.get(article.author_id)
+    return render_template('articles.html', 
+                        year=datetime.now().year, 
+                        articleBody=md.render(article.body), 
+                        articleHeading=article.heading, 
+                        articleAuthor=f"{author.first_name} {author.last_name}")
 
 @app.errorhandler(404)
 def not_found(exc):
     return Response(render_template('404.html', title="Page Not Found")), 404
-

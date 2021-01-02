@@ -33,35 +33,38 @@ class User(db.Model):
 
 
     def is_active(self):
-        """True, as all users are active."""
-        return not self.user_type == "Wating_For_Aprrove"
+        """returns if user type is anything else than NOT_APPROVED"""
+        return not self.user_type == "NOT_APPROVED"
 
-    def get_all_inactive():
-        return (User.query.filter_by(user_type = "Waiting_For_Aprrove"))
-            
-
-    def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
-        return self.user_id
 
     def is_authenticated(self):
-        """Return True if the user is authenticated."""
+        """returns true if the user is authenticated."""
         return self.authenticated
 
     def is_anonymous(self):
+        """returns false as all users are not anonymous"""
         return False
     
     def is_admin(self):
-        return self.user_type == "Admin_User"
+        """returns if the user is admin"""
+        return self.user_type == "ADMIN"
 
-    def get_inactive_users():
-        return (User.query.filter_by(user_type="Wating_For_Aprrove"))
+    def get_id(self):
+        """returns user id"""
+        return self.user_id
 
-    def acceptUser(self):
-        self.user_type = "Normal_User"
+    def get_all_inactive():
+        """returns all users who are not approved"""
+        return (User.query.filter_by(user_type = "NOT_APPROVED"))
+            
+
+    def accept_user(self):
+        """accepts the user and commits to db"""
+        self.user_type = "USER"
         db.session.commit()
 
-    def deleteUser(self):
+    def delete_user(self):
+        """deletes user's row and commits to db"""
         db.session.delete(self)
         db.session.commit()
 
@@ -82,37 +85,42 @@ class Article(db.Model):
     author_id = db.Column(db.Integer, nullable=False)
     acceptor_id = db.Column(db.Integer, nullable=True)
 
-    def get_articles():
-        articlesList = []
-        for articles in db.session.query(Article).all()[:5]:
-            articlesList.append(articles)
-        return articlesList
-
     def is_active(self):
+        """returns if article is accepted"""
         return self.is_accepted
+
+    def get_all_articles():
+        """returns all articles"""
+        return db.session.query(Article).all()
+
+    def get_all_accepted():
+        """returns all accepted articles"""
+        return Article.query.filter_by(is_accepted=True)
+
+    def get_all_unaccepted():
+        """returns all unaccepted articles"""
+        return Article.query.filter_by(is_accepted=False)
+
     
-    def get_all_active():
-        return (Article.query.filter_by(is_accepted=True))
-
-    def get_inactive_articles():
-        return (Article.query.filter_by(is_accepted=False))
-
-    def acceptArticle(self):
+    def accept_article(self):
+        """accepts article and commits to db"""
         self.is_accepted = True
         self.accept_date = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         self.acceptor_id = current_user.user_id
         db.session.commit()
 
-    def deleteArticle(self):
+    def delete_article(self):
+        """deletes article and commits to db"""
         db.session.delete(self)
         db.session.commit()
 
 
+"""function decorator for admin only pages"""
+"""TODO currently calls unauthorized if not admin instead of custom stuff but we are lazy :3"""
 def admin_required(func):
 
     @wraps(func)
     def decorated_view(*args, **kwargs):
-        print(current_user.first_name)
         if not current_user.is_admin():
             return app.login_manager.unauthorized()
         return func(*args, **kwargs)
