@@ -30,9 +30,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField('התחבר')
 
 class SubmitArticle(FlaskForm):
-    heading = StringField('כותרת',
+    heading = StringField('כותרת ראשית',
                             validators=[DataRequired()])
-    
+    caption = StringField('כותרת משנה',
+                            validators=[DataRequired()])
+    thumbnail = StringField('תמונת כיסוי',
+                            validators=[DataRequired()])
     body = StringField('תוכן הפוסט', 
                         validators=[DataRequired()])
     submit = SubmitField('שליחה')

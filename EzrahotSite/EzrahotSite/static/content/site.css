@@ -1,6 +1,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    direction: rtl;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -69,3 +70,7 @@ input[type="checkbox"].input-validation-error {
     }
 }
 
+.articleBody img {
+    height: 40%;
+    width: 40%;
+}

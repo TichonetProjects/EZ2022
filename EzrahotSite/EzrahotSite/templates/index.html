@@ -3,8 +3,13 @@
 {% block content %}
 
 {% for article in articles %}
+<img style="width:30%;height:30%;" src="{{article.thumbnail}}" />
+<br />
 <a href="article/{{article.article_id}}">{{article.heading}}</a>
 <br />
+<h4>{{article.caption}}</h4>
+<br />
+
 {% endfor%}
 
 

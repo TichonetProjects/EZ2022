@@ -2,13 +2,16 @@
 
 {% block content %}
 
-<body style="direction: rtl;">
-    <h2><b>{{articleHeading}}</b></h2>
+<body style="direction: rtl; display:flex; flex-direction:row">
+    <h2><b>{{article.heading}}</b></h2>
     <br>
-    {{articleBody}}
+    <h3>{{article.caption}}</h3>
     <br>
-    <h3>פורסם על ידי {{articleAuthor}}</h3>
+    <h3>{{articleAuthor}}</h3>
+    <br>
+    <h4 class="articleBody">{{articleBody}}</h4>
 
+    
 </body>
 
 {% endblock %}

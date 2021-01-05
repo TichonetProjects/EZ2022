@@ -148,7 +148,9 @@ def submitArticle():
             post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
             accept_date=None,
             is_accepted=False,
-            author_id=current_user.get_id())
+            author_id=current_user.get_id(),
+            caption=form.caption.data,
+            thumbnail=form.thumbnail.data)
 
         db.session.add(article)
         db.session.commit()
@@ -230,9 +232,9 @@ def articles(index):
     author = User.query.get(article.author_id)
     return render_template('articles.html', 
                         year=datetime.now().year, 
-                        articleBody=md.render(article.body), 
-                        articleHeading=article.heading, 
-                        articleAuthor=f"{author.first_name} {author.last_name}")
+                        article=article,
+                        articleBody=md.render(article.body),
+                        articleAuthor=f"{author.first_name} {author.last_name}, {author.school_class}")
 
 @app.errorhandler(404)
 def not_found(exc):

@@ -75,6 +75,10 @@ class Article(db.Model):
     article_id = db.Column(db.Integer, primary_key=True)
     
     heading = db.Column(db.String, nullable=False)
+    caption = db.Column(db.String, nullable=False)
+
+    thumbnail = db.Column(db.String, nullable=False)
+
     body = db.Column(db.String, nullable=False)
     
     post_date = db.Column(db.String, nullable=False)
