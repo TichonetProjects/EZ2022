@@ -70,7 +70,7 @@
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -78,23 +78,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Application name</a>
+                <a href="/" class="navbar-brand"><strong style="color:blue">Ezrahot Site</strong></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('about') }}">About</a></li>
-                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('home') }}"><strong style="color:blue">Home</strong></a></li>
+                    <li><a href="{{ url_for('about') }}"><strong style="color:blue">About</strong></a></li>
+                    <li><a href="{{ url_for('contact') }}"><strong style="color:blue">Contact</strong></a></li>
                     {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('submitArticle') }}">Submit Article</a></li>
+                    <li><a href="{{ url_for('submitArticle') }}"><strong style="color:blue">Submit Article</strong></a></li>
                     {% if current_user.is_admin() %}
-                    <li><a href="{{ url_for('controlPanel') }}">Control Panel</a></li>
+                    <li><a href="{{ url_for('controlPanel') }}"><strong style="color:blue">Control Panel</strong></a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('profile') }}"><strong style="color:blue">Profile</strong></a></li>
+                    <li><a href="{{ url_for('logout') }}"><strong style="color:blue">Logout</strong></a></li>
                     {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                    <li><a href="{{ url_for('login') }}"><strong style="color:blue">Login</strong></a></li>
+                    <li><a href="{{ url_for('register') }}"><strong style="color:blue">Register</strong></a></li>
                     {% endif %}
                 </ul>
             </div>
