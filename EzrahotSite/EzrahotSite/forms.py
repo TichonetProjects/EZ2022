@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, ValidationError, InputRequired
 from EzrahotSite.models import User
+from flask_mde import MdeField
 
 class RegistrationForm(FlaskForm):
     first_name = StringField('שם פרטי',
@@ -36,7 +37,6 @@ class SubmitArticle(FlaskForm):
                             validators=[DataRequired()])
     thumbnail = StringField('תמונת כיסוי',
                             validators=[DataRequired()])
-    body = StringField('תוכן הפוסט', 
-                        validators=[DataRequired()])
+    body = MdeField('תוכן הכתבה', 
+                    validators=[InputRequired("Input required")])
     submit = SubmitField('שליחה')
-    

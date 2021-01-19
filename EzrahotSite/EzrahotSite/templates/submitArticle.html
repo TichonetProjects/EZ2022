@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+<head>
+    {{mde.css}}
+</head>
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -63,6 +65,6 @@
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
     </form>
-  </div>
-
+</div>
+{{ mde.js }}
 {% endblock %}

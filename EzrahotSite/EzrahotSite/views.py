@@ -125,14 +125,17 @@ def login():
 @app.route('/profile')
 @login_required
 def profile():
-        return render_template(
+    user_articles = Article.get_all_user(current_user.user_id)
+    return render_template(
         'profile.html',
         title='Profile',
         year=datetime.now().year,
         message='Profile Page.',
+        user_articles=user_articles
     )
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))

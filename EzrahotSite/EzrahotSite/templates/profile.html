@@ -5,5 +5,14 @@
 <div class="app" style="direction:rtl">
     <h1>הפרופיל שלך</h1> <br />
     <h3 class="text-muted">שלום, {{current_user.first_name}}</h3>
-
+    <h2 class="text-muted">הנה הכתבות שכתבת:</h2>
+</div>
+<div>
+    {% for userArticle in user_articles %}
+    <img width="30%" height="30%" src="{{userArticle.thumbnail}}" />
+    <br />
+    <a href="article/{{userArticle.article_id}}"><h3>{{userArticle.heading}}</h3></a>
+    <br />
+    {% endfor%}
+</div>
 {% endblock %}

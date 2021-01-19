@@ -105,7 +105,9 @@ class Article(db.Model):
         """returns all unaccepted articles"""
         return Article.query.filter_by(is_accepted=False)
 
-    
+    def get_all_user(author):
+        return Article.query.filter_by(author_id=author)
+
     def accept_article(self):
         """accepts article and commits to db"""
         self.is_accepted = True
@@ -117,7 +119,7 @@ class Article(db.Model):
         """deletes article and commits to db"""
         db.session.delete(self)
         db.session.commit()
-
+    
 
 """function decorator for admin only pages"""
 """TODO currently calls unauthorized if not admin instead of custom stuff but we are lazy :3"""
