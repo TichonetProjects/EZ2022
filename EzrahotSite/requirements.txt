@@ -6,3 +6,4 @@ flask-sqlalchemy
 Flask-Misaka
 flask_simplemde
 email-validator
+Flask-MDE
