@@ -50,11 +50,14 @@
     <Content Include="EzrahotSite\templates\404.html" />
     <Content Include="EzrahotSite\templates\articles.html" />
     <Content Include="EzrahotSite\templates\controlPanel.html" />
+    <Content Include="EzrahotSite\templates\covid-19.html" />
     <Content Include="EzrahotSite\templates\error.html" />
     <Content Include="EzrahotSite\templates\login.html" />
     <Content Include="EzrahotSite\templates\profile.html" />
     <Content Include="EzrahotSite\templates\register.html" />
     <Content Include="EzrahotSite\templates\submitArticle.html" />
+    <Content Include="EzrahotSite\templates\news.html" />
+    <Content Include="EzrahotSite\templates\weekend.html" />
     <Content Include="requirements.txt" />
     <Content Include="EzrahotSite\static\content\bootstrap.css" />
     <Content Include="EzrahotSite\static\content\bootstrap.min.css" />
