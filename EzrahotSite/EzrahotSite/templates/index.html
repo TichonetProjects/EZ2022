@@ -54,7 +54,7 @@
 
     <div class="column">
         {% if article.heading %}
-        <strong><h3 style="color:blue;"><a href="article/{{article.article_id}}">{{article.heading}}</a></h3></strong>
+        <strong><h3 style="color:blue;"><a href="article/{{article.article_id}}">{{article.heading}}({{articleAuthor}})</a></h3></strong>
         {%endif%}
 
         {% if article.caption != "NULL" %}
