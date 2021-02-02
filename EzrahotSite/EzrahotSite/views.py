@@ -232,7 +232,7 @@ def articles(index):
         if not (current_user.is_authenticated and (current_user.user_id == article.author_id or current_user.is_admin())):
             abort(404, description="Resource not found")
 
-    author = User.query.get(article.author_id)
+    author = article.get_author()
     return render_template('articles.html', 
                         year=datetime.now().year, 
                         article=article,

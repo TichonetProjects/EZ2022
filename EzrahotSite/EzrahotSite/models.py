@@ -1,4 +1,4 @@
-from EzrahotSite import db, login_manager, app
+from EzrahotSite import db, login_manager, app, md
 
 from flask_wtf import FlaskForm
 from wtforms import StringField
@@ -92,6 +92,18 @@ class Article(db.Model):
     def is_active(self):
         """returns if article is accepted"""
         return self.is_accepted
+
+    def get_author(self):
+        """returns author user object"""
+        return User.query.get(self.author_id)
+
+    def get_acceptor(self):
+        """returns acceptor user object"""
+        return User.query.get(self.acceptor_id)
+
+    def get_body(self, length, three_dots = False):
+        "returns article body (without markdown)"
+        return md.render(self.body[:length] + ("..." if three_dots else None))
 
     def get_all_articles():
         """returns all articles"""
