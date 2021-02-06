@@ -25,7 +25,6 @@ def home():
     return render_template(
         'index.html',
         title='Home Page',
-        year=datetime.now().year,
         articles=acceptedArticles
     )
 
@@ -36,7 +35,6 @@ def contact():
     return render_template(
         'contact.html',
         title='Contact',
-        year=datetime.now().year,
         message='Your contact page.'
     )
 
@@ -46,10 +44,12 @@ def about():
     return render_template(
         'about.html',
         title='About',
-        year=datetime.now().year,
         message='Your application description page.',
     )
 
+@app.route('/devteam')
+def devteam():
+    return render_template('devteam.html', title="Develpment Team")
 
 @app.route('/test')
 def test():
@@ -59,7 +59,7 @@ def test():
     return render_template(
         'about.html',
         title='About',
-        year=datetime.now().year,
+        
         message='Your application description page.',
         )
 
@@ -90,7 +90,6 @@ def register():
         return render_template(
         'register.html',
         title='Register',
-        year=datetime.now().year,
         message='Resgister Page.',
         form = form
     )
@@ -117,7 +116,7 @@ def login():
     return render_template(
         'login.html',
         title='Login',
-        year=datetime.now().year,
+        
         message='Login Page.',
         form=form
     )
@@ -129,7 +128,6 @@ def profile():
     return render_template(
         'profile.html',
         title='Profile',
-        year=datetime.now().year,
         message='Profile Page.',
         user_articles=user_articles
     )
@@ -162,7 +160,7 @@ def submitArticle():
 
         return redirect(url_for('articles', index=article.article_id))
 
-    return render_template('submitArticle.html', year=datetime.now().year, form=form)
+    return render_template('submitArticle.html',  form=form)
 
 @app.route('/control-panel')
 @login_required
@@ -171,7 +169,7 @@ def controlPanel():
     inactiveUsers = User.get_all_inactive()
     inactiveArticles = Article.get_all_unaccepted()
 
-    return render_template('controlPanel.html', year=datetime.now().year, inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
+    return render_template('controlPanel.html',  inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
 
 
 """
@@ -234,7 +232,7 @@ def articles(index):
 
     author = article.get_author()
     return render_template('articles.html', 
-                        year=datetime.now().year, 
+                         
                         article=article,
                         articleBody=md.render(article.body),
                         articleAuthor=f"{author.first_name} {author.last_name}, {author.school_class}")
