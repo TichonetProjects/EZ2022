@@ -1,50 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<style>
-    a:link {
-        color: blue;
-        background-color: transparent;
-        text-decoration: none;
-    }
 
-    a:visited {
-        color: #3399ff;
-        background-color: transparent;
-        text-decoration: none;
-    }
-
-    a:hover {
-        color: black;
-        background-color: transparent;
-        text-decoration: underline;
-    }
-
-    a:active {
-        color: blue;
-        background-color: transparent;
-        text-decoration: underline;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    .column {
-        float: left;
-        width: 33.33%;
-        padding: 5px;
-    }
-
-    /* Clearfix (clear floats) */
-    .row::after {
-        content: "";
-        clear: both;
-        display: table;
-        display: flex;
-        align-items: center;
-    }
-</style>
 <div class="home-continer">
     <div id="slideshow-example" data-component="slideshow" class="slideShow">
         <div role="list">

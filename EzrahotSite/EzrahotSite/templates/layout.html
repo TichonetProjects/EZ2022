@@ -78,11 +78,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand"><strong style="color:blue">Ezrahot Site</strong></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('home') }}"><strong style="color:blue">Home</strong></a></li>
+                    <li><a href="{{ url_for('articlesview') }}"><strong style="color:blue">Articles</strong></a></li>
                     <li><a href="{{ url_for('about') }}"><strong style="color:blue">About</strong></a></li>
                     <li><a href="{{ url_for('contact') }}"><strong style="color:blue">Contact</strong></a></li>
                     {% if current_user.is_authenticated %}

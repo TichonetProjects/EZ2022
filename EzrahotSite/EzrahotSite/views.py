@@ -28,6 +28,15 @@ def home():
         articles=acceptedArticles
     )
 
+@app.route('/articles-list')
+def articlesview():
+    acceptedArticles = Article.get_all_accepted()
+
+    return render_template(
+        'articlesview.html',
+        title='Articles',
+        articles=acceptedArticles
+    )
 
 @app.route('/contact')
 def contact():
@@ -50,19 +59,6 @@ def about():
 @app.route('/devteam')
 def devteam():
     return render_template('devteam.html', title="Develpment Team")
-
-@app.route('/test')
-def test():
-    """renders the test page."""
-    """currently empty"""
-
-    return render_template(
-        'about.html',
-        title='About',
-        
-        message='Your application description page.',
-        )
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
