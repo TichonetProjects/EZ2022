@@ -47,8 +47,10 @@
     <Content Include="EzrahotSite\database.db" />
     <Content Include="EzrahotSite\static\img\404.png" />
     <Content Include="EzrahotSite\static\img\spiner.png" />
+    <Content Include="EzrahotSite\static\scripts\main.js" />
     <Content Include="EzrahotSite\templates\404.html" />
     <Content Include="EzrahotSite\templates\articles.html" />
+    <Content Include="EzrahotSite\templates\articlesview.html" />
     <Content Include="EzrahotSite\templates\controlPanel.html" />
     <Content Include="EzrahotSite\templates\covid-19.html" />
     <Content Include="EzrahotSite\templates\error.html" />
@@ -57,6 +59,7 @@
     <Content Include="EzrahotSite\templates\register.html" />
     <Content Include="EzrahotSite\templates\submitArticle.html" />
     <Content Include="EzrahotSite\templates\news.html" />
+    <Content Include="EzrahotSite\templates\devteam.html" />
     <Content Include="EzrahotSite\templates\weekend.html" />
     <Content Include="requirements.txt" />
     <Content Include="EzrahotSite\static\content\bootstrap.css" />

@@ -1,80 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<style>
-    a:link {
-        color: blue;
-        background-color: transparent;
-        text-decoration: none;
-    }
 
-    a:visited {
-        color: #3399ff;
-        background-color: transparent;
-        text-decoration: none;
-    }
-
-    a:hover {
-        color: black;
-        background-color: transparent;
-        text-decoration: underline;
-    }
-
-    a:active {
-        color: blue;
-        background-color: transparent;
-        text-decoration: underline;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    .column {
-        float: left;
-        width: 33.33%;
-        padding: 5px;
-       
-    }
-
-    /* Clearfix (clear floats) */
-    .row::after {
-        content: "";
-        clear: both;
-        display: table;
-        display: flex;
-        align-items: center;
-    }
-</style>
-{% for article in articles %}
-<div class="row">
-    <div class="column">
-        
-    </div>
-
-    <div class="column">
-        {% if article.heading %}
-        <strong><h3 style="color:blue;"><a href="article/{{article.article_id}}">{{article.heading}}({{article.get_author().first_name}})</a></h3></strong>
-        {%endif%}
-
-        {% if article.caption != "NULL" %}
-        <h5>{{article.caption}}</h5>
-        {%endif%}
-
-        {% if article.body != "NULL" %}
-        <h5>{{article.get_body(50, three_dots=True)}}</h5>
-        {%endif%}
-
-    </div>
-    <div class="column">
-       <br />
-        {%if article.thumbnail != "NULL" %}
-        <img style="width:100%;height:100%;" src="{{article.thumbnail}}" />
-        {%endif%}
+<div class="home-continer">
+    <div id="slideshow-example" data-component="slideshow" class="slideShow">
+        <div role="list">
+            {% for article in articles %}
+            <div class="slide">
+                <img src="{{article.thumbnail}}" alt="" width="400" height="300">
+            </div>
+            {% endfor%}
+        </div>
     </div>
 </div>
-
-{% endfor%}
-
 
 {% endblock %}
