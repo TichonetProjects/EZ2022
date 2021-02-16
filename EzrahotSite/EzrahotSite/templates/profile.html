@@ -24,7 +24,7 @@
     <h2 class="text-muted">הנה הכתבות שכתבת:</h2>
 </div>
 <div>
-    {% for userArticle in user_articles %}
+    {% for article in user_articles %}
     <div class="row">
         <div class="column">
 
@@ -47,6 +47,6 @@
             {%endif%}
         </div>
     </div>
-{%endfor%}
+    {%endfor%}
 </div>
 {% endblock %}
