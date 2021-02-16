@@ -1,3 +1,6 @@
+* {
+    box-sizing:border-box;
+}
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -74,33 +77,75 @@ input[type="checkbox"].input-validation-error {
     height: 40%;
     width: 40%;
 }
-
-.topnav {
-    overflow: hidden;
-    background-color: #f1f1f1;
+footer{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+}
+footer p{
+    color:black;
+}
+.devteam {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "gad eilon" 
+                         "yarom ilay";
+}
+[data-component="slideshow"] .slide {
+    display: none;
 }
 
-    .topnav a {
-        float: left;
-        display: block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        border-right: 3px solid blue;
-    }
+[data-component="slideshow"] .slide.active {
+    display: block;
+}
+.home-continer{
+    width:100vw;
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:-112px;
+    margin-right:-408px;
+}
+.home-continer img{
+    margin-top:-430px;
+}
+a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
 
-        .topnav a:hover {
-            border-bottom: 3px solid red;
-        }
+a:visited {
+    color: #3399ff;
+    background-color: transparent;
+    text-decoration: none;
+}
 
-        .topnav a.active {
-            border-bottom: 3px solid red;
-        }
+a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: underline;
+}
 
+a:active {
+    color: blue;
+    background-color: transparent;
+    text-decoration: underline;
+}
 
-
-
-
-
+.column {
+    float: left;
+    width: 33.33%;
+    height: 33.33%;
+    padding: 5px;
+}
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+    display: flex;
+    align-items: center;
+}
