@@ -139,18 +139,14 @@ def logout():
 def editArticle(index):
     article = Article.query.get(index)
     
-    if not article:
+    if not article or (not (current_user.is_authenticated and (current_user.user_id == article.author_id or current_user.is_admin()))):
         abort(404, description="Resource not found")
-    
-    elif not article.is_accepted:
-        if not (current_user.is_authenticated and (current_user.user_id == article.author_id or current_user.is_admin())):
-            abort(404, description="Resource not found")
 
     form = SubmitArticle()
     form.heading.data = article.heading
     form.caption.data = article.caption
     form.body.data = article.body
-    form.thumbnail = article.thumbnail
+    form.thumbnail.data = article.thumbnail
 
     if form.validate_on_submit():
         article = Article(
