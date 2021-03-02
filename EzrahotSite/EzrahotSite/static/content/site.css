@@ -149,3 +149,32 @@ a:active {
     display: flex;
     align-items: center;
 }
+
+topnav {
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-right: 3px solid blue;
+}
+
+    .topnav a:hover {
+        border-bottom: 3px solid red;
+    }
+
+    .topnav a.active {
+        border-bottom: 3px solid red;
+    }
+    .topnav a.last {
+        border-right: 3px solid blue;
+    }
+
+    
