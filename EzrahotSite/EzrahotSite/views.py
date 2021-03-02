@@ -134,17 +134,27 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/submit-article', methods=['GET', 'POST'])
+@app.route('/edit-article/<index>/', methods=['GET', 'POST'])
 @login_required
-def submitArticle():
+def editArticle(index):
+    article = Article.query.get(index)
+    
+    if not article or (not (current_user.is_authenticated and (current_user.user_id == article.author_id or current_user.is_admin()))):
+        abort(404, description="Resource not found")
+
     form = SubmitArticle()
+    form.heading.data = article.heading
+    form.caption.data = article.caption
+    form.body.data = article.body
+    form.thumbnail.data = article.thumbnail
+
     if form.validate_on_submit():
         article = Article(
             heading=form.heading.data,
             body=form.body.data,
-            post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
-            accept_date=None,
-            is_accepted=False,
+            post_date=article.post_date,
+            accept_date=article.accept_date,
+            is_accepted=article.is_accepted,
             author_id=current_user.get_id(),
             caption=form.caption.data,
             thumbnail=form.thumbnail.data)
@@ -157,6 +167,25 @@ def submitArticle():
         return redirect(url_for('articles', index=article.article_id))
 
     return render_template('submitArticle.html',  form=form)
+
+@app.route('/create-article/', methods=['GET', 'POST'])
+@login_required
+def createArticle():
+    article = Article(
+        heading='',
+        body='',
+        post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
+        accept_date=None,
+        is_accepted=False,
+        author_id=current_user.get_id(),
+        caption='',
+        thumbnail='')
+
+    db.session.add(article)
+    db.session.commit()
+
+    return redirect(url_for('editArticle', index=article.article_id))
+
 
 @app.route('/control-panel')
 @login_required

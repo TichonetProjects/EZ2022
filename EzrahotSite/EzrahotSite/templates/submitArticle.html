@@ -59,6 +59,9 @@
                 {% else %}
                 {{ form.body(class="form-control form-control-lg") }}
                 {% endif %}
+
+                {{mde.preview}}
+
             </div>
         </fieldset>
         <div class="form-group">
@@ -67,4 +70,5 @@
     </form>
 </div>
 {{ mde.js }}
+
 {% endblock %}
