@@ -141,7 +141,7 @@ a:active {
     height: 33.33%;
     padding: 5px;
 }
-/* Clearfix (clear floats) */
+
 .row::after {
     content: "";
     clear: both;
@@ -176,5 +176,19 @@ topnav {
     .topnav a.last {
         border-right: 3px solid blue;
     }
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
 
-    
+
