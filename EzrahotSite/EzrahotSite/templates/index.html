@@ -14,7 +14,17 @@
         <div role="list">
             {% for article in articles %}
             <div class="slide">
-                <img src="{{article.thumbnail}}" alt="" width="400" height="300">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:right">
+                                <a href="/article/{{article.article_id}}"><h2 style="margin-top: -355px; margin-left: 250px">{{article.heading}}</h2></a>
+                                <h3>{{article.caption}}</h3>
+                            </td>
+                            <td style="text-align:left"><img src="{{article.thumbnail}}" alt="" width="400" height="300"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             {% endfor%}
         </div>

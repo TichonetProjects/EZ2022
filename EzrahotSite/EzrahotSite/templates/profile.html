@@ -1,6 +1,7 @@
 ﻿{% extends "layout.html" %}
 
 {% block content %}
+
 <style>
     .column {
         float: left;
@@ -38,6 +39,13 @@
             {% if article.caption != "NULL" %}
             <h5>{{article.caption}}</h5>
             {%endif%}
+
+            <form action="/edit-article/{{article.article_id}}" method="post">
+                <button type="submit"><i class="fas fa-edit"></i></button>
+            </form>
+            <form action="/deletearticle/{{article.article_id}}" method="post">
+                <button type="submit"><i class="fas fa-times"></i></button>
+            </form>
 
         </div>
         <div class="column">

@@ -59,11 +59,13 @@
                 {% else %}
                 {{ form.body(class="form-control form-control-lg") }}
                 {% endif %}
-
+                 
+                <h1 style="text-decoration:underline">Preview</h1>
                 {{mde.preview}}
 
             </div>
         </fieldset>
+
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>

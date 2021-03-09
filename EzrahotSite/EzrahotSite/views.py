@@ -184,6 +184,7 @@ def createArticle():
     db.session.add(article)
     db.session.commit()
 
+    next_page = request.args.get('next')
     return redirect(url_for('editArticle', index=article.article_id))
 
 
@@ -209,6 +210,7 @@ def acceptUser(index):
     if user:
         user.accept_user()
     
+    next_page = request.args.get('next')
     return redirect(url_for('controlPanel'))
 
 @app.route("/deleteuser/<index>", methods=['GET', 'POST'])
@@ -220,6 +222,7 @@ def deleteUser(index):
     if user:
         user.delete_user()
 
+    next_page = request.args.get('next')
     return redirect(url_for('controlPanel'))
 
 @app.route("/acceptarticle/<index>", methods=['GET', 'POST'])
@@ -230,8 +233,9 @@ def acceptArticle(index):
 
     if article:
         article.accept_article()
-
-    return redirect(url_for('controlPanel'))
+    
+    next_page = request.args.get('next')
+    return redirect(next_page) if next_page else redirect(url_for('home'))
 
 @app.route("/deletearticle/<index>", methods=['GET', 'POST'])
 @login_required
@@ -242,7 +246,8 @@ def deleteArticle(index):
     if article:
         article.delete_article()
 
-    return redirect(url_for('controlPanel'))
+    next_page = request.args.get('next')
+    return redirect(next_page) if next_page else redirect(url_for('home'))
 
 @app.route('/article/<index>/')
 def articles(index):

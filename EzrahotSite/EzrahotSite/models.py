@@ -103,7 +103,7 @@ class Article(db.Model):
 
     def get_body(self, length, three_dots = False):
         "returns article body (without markdown)"
-        return md.render(self.body[:length] + ("..." if three_dots else None))
+        return md.render(self.body[:length] + ("..." if three_dots else ""))
 
     def get_all_articles():
         """returns all articles"""
