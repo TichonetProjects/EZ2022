@@ -141,20 +141,45 @@ def editArticle(index):
     
     if not article or (not (current_user.is_authenticated and (current_user.user_id == article.author_id or current_user.is_admin()))):
         abort(404, description="Resource not found")
-
+    
     form = SubmitArticle()
-    form.heading.data = article.heading
-    form.caption.data = article.caption
-    form.body.data = article.body
-    form.thumbnail.data = article.thumbnail
 
+
+    if form.validate_on_submit():
+        article.heading = form.heading.data
+        article.body = form.body.data
+        article.caption = form.caption.data
+        article.thumbnail = form.thumbnail.data
+  
+
+        db.session.commit()
+
+        print(article.body)
+
+        flash('הכתבה עודכנה בהצלחה', 'success')
+
+        return redirect(url_for('articles', index=article.article_id))
+
+    elif request.method == 'GET':
+        form.heading.data = article.heading
+        form.caption.data = article.caption
+        form.body.data = article.body
+        form.thumbnail.data = article.thumbnail
+
+    print(request.method)
+    return render_template('submitArticle.html',  form=form)
+
+@app.route('/create-article/', methods=['GET', 'POST'])
+@login_required
+def createArticle():
+    form = SubmitArticle()
     if form.validate_on_submit():
         article = Article(
             heading=form.heading.data,
             body=form.body.data,
-            post_date=article.post_date,
-            accept_date=article.accept_date,
-            is_accepted=article.is_accepted,
+            post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
+            accept_date=None,
+            is_accepted=False,
             author_id=current_user.get_id(),
             caption=form.caption.data,
             thumbnail=form.thumbnail.data)
@@ -162,30 +187,11 @@ def editArticle(index):
         db.session.add(article)
         db.session.commit()
 
-        flash('הפוסט נוצר בהצלחה וממתין לאישור מנהל.', 'success')
+        flash('הכתבה נוצרה בהצלחה וממתינה לאישור מנהל.', 'success')
 
         return redirect(url_for('articles', index=article.article_id))
 
-    return render_template('submitArticle.html',  form=form)
-
-@app.route('/create-article/', methods=['GET', 'POST'])
-@login_required
-def createArticle():
-    article = Article(
-        heading='',
-        body='',
-        post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
-        accept_date=None,
-        is_accepted=False,
-        author_id=current_user.get_id(),
-        caption='',
-        thumbnail='')
-
-    db.session.add(article)
-    db.session.commit()
-
-    next_page = request.args.get('next')
-    return redirect(url_for('editArticle', index=article.article_id))
+    return render_template('submitArticle.html', form=form)
 
 
 @app.route('/control-panel')

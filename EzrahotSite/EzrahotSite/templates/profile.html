@@ -40,7 +40,7 @@
             <h5>{{article.caption}}</h5>
             {%endif%}
 
-            <form action="/edit-article/{{article.article_id}}" method="post">
+            <form action="/edit-article/{{article.article_id}}" method="get">
                 <button type="submit"><i class="fas fa-edit"></i></button>
             </form>
             <form action="/deletearticle/{{article.article_id}}" method="post">
