@@ -5,26 +5,33 @@
 <div class="home-continer">
     <div class="title">
         <h1>{{home_paragraph}}</h1>
+        <img src="./static/img/refugee.jpg">
     </div>
-    <div id="slideshow-example" data-component="slideshow" class="slideShow">
-        <div role="list">
-            {% for article in articles %}
-            <div class="slide">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style="text-align:right">
-                                <a href="/article/{{article.article_id}}"><h2 style="margin-top: -355px; margin-left: 250px">{{article.heading}}</h2></a>
-                                <h3>{{article.caption}}</h3>
-                            </td>
-                            <td style="text-align:left"><img src="{{article.thumbnail}}" alt="" width="400" height="300"></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="slideshow-continer">
+        <div class="slide-container">
+            <div class="slide fade">
+                <img src='https://images.unsplash.com/photo-1590595978583-3967cf17d2ea?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
             </div>
-            {% endfor%}
+            <div class="slide fade">
+                <img src='https://images.unsplash.com/photo-1588807308097-fb6e5047df8c?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
+            </div>
+            <div class="slide fade">
+                <img src='https://images.unsplash.com/photo-1589808710416-24cf7ac026f2?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
+            </div>
+            <div class="slide fade">
+                <img src='https://images.unsplash.com/photo-1588796388882-a4d533c47e5e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
+            </div>
+
+            <a href="#" class="prev" title="Previous">&#10094</a>
+            <a href="#" class="next" title="Next">&#10095</a>
         </div>
-    </div>
+        <div class="dots-container">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div> 
 </div>
 
 {% endblock %}

@@ -25,7 +25,7 @@ def home():
     return render_template(
         'index.html',
         title='Home Page',
-        home_paragraph="����� ���� ������ ���",
+        home_paragraph="מערכת עולם זכויות אדם",
         articles=acceptedArticles
     )
 

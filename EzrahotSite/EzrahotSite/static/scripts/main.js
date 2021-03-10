@@ -1,25 +1,42 @@
-var slideshows = document.querySelectorAll('[data-component="slideshow"]');
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide")
+const dots = document.querySelectorAll('.dot')
 
-// Apply to all slideshows that you define with the markup wrote
-slideshows.forEach(initSlideShow);
-
-function initSlideShow(slideshow) {
-
-    var slides = document.querySelectorAll(`#${slideshow.id} [role="list"] .slide`); // Get an array of slides
-
-    var index = 0, time = 5000;
-    slides[index].classList.add('active');
-
-    setInterval(() => {
-        slides[index].classList.remove('active');
-
-        //Go over each slide incrementing the index
-        index++;
-
-        // If you go over all slides, restart the index to show the first slide and start again
-        if (index === slides.length) index = 0;
-
-        slides[index].classList.add('active');
-
-    }, time);
+const init = (n) => {
+    slides.forEach((slide, index) => {
+        slide.style.display = "none"
+        dots.forEach((dot, index) => {
+            dot.classList.remove("active")
+        })
+    })
+    slides[n].style.display = "block"
+    dots[n].classList.add("active")
 }
+document.addEventListener("DOMContentLoaded", init(currentSlide))
+const next = () => {
+    currentSlide >= slides.length - 1 ? currentSlide = 0 : currentSlide++
+    init(currentSlide)
+}
+
+const prev = () => {
+    currentSlide <= 0 ? currentSlide = slides.length - 1 : currentSlide--
+    init(currentSlide)
+}
+
+document.querySelector(".next").addEventListener('click', next)
+
+document.querySelector(".prev").addEventListener('click', prev)
+
+
+setInterval(() => {
+    next()
+}, 5000);
+
+dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+        console.log(currentSlide)
+        init(i)
+        currentSlide = i
+    })
+})
+
