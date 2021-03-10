@@ -25,6 +25,7 @@ def home():
     return render_template(
         'index.html',
         title='Home Page',
+        home_paragraph="����� ���� ������ ���",
         articles=acceptedArticles
     )
 
