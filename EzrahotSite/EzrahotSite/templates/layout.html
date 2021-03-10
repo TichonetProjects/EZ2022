@@ -12,108 +12,41 @@
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
 
     <style>
-        body {
-            font-family: "Ariel", sans-serif;
+        table, th, td {
+            border: 0px solid black;
+            border-collapse: collapse;
         }
 
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            right: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
+            td:hover {
+                background-color: yellow;
+            }
+
+        th, td {
+            padding: 15px;
+            border-right: 3px solid blue;
+            border-left: 3px solid blue;
+            color: black;
         }
 
-            .sidenav a {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
-
-                .sidenav a:hover {
-                    color: #f1f1f1;
-                }
-
-            .sidenav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                font-size: 36px;
-                margin-left: 50px;
-            }
-
-        #main {
-            transition: margin-left .5s;
-            padding: 16px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-
-                .sidenav a {
-                    font-size: 18px;
-                }
+        th {
+            text-align: right;
         }
     </style>
 
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="topnav">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('home') }}"><strong style="color:blue">Home</strong></a></li>
-                    <li><a href="{{ url_for('articlesview') }}"><strong style="color:blue">Articles</strong></a></li>
-                    <li><a href="{{ url_for('about') }}"><strong style="color:blue">About</strong></a></li>
-                    <li><a href="{{ url_for('contact') }}"><strong style="color:blue">Contact</strong></a></li>
-                    {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('createArticle') }}"><strong style="color:blue">Submit Article</strong></a></li>
-                    {% if current_user.is_admin() %}
-                    <li><a href="{{ url_for('controlPanel') }}"><strong style="color:blue">Control Panel</strong></a></li>
-                    {% endif %}
-                    <li><a href="{{ url_for('profile') }}"><strong style="color:blue">Profile</strong></a></li>
-                    <li><a href="{{ url_for('logout') }}"><strong style="color:blue">Logout</strong></a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('login') }}"><strong style="color:blue">Login</strong></a></li>
-                    <li><a href="{{ url_for('register') }}"><strong style="color:blue">Register</strong></a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+    <img src="../static/img/404.jpg" />
+    <div class="navbar navbar-default navbar-fixed-top" dir="rtl">
+        <table dir="rtl" , cellspacing="0">
+            <tr>
+                <td><a href="{{ url_for('home') }}"><strong style="color:blue">בית</strong></a></td>
+                <td><a href="{{ url_for('articles') }}"><strong style="color:blue">כתבות</strong></a></td>
+                <td><a href="{{ url_for('about') }}"><strong style="color:blue">על</strong></a></td>
+                <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></td>
+            </tr>
+        </table>
     </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="/home">בית</a>
-        <a href="/about">על</a>
-        <a href="/contact">צרו קשר</a>
-        <a href="/login">כניסה</a>
-        <a href="/register">הרשמה</a>
-        <a href="/profile">פרופיל</a>
-        <a href="/control-panel">פאנל הבקרה</a>
-    </div>
-
-
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; תפריט</span>
 
     <br />
     <br />
