@@ -152,6 +152,7 @@ a:active {
 topnav {
     overflow: hidden;
     background-color: #f1f1f1;
+
 }
 
 .topnav a {
@@ -189,5 +190,36 @@ topnav {
     margin-right: auto;
     width: 50%;
 }
+
+body {
+    direction: rtl;
+}
+nav {
+    direction: rtl;
+}
+    nav.navbar-nav {
+        list-style-type: none;
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+.nav.navbar-nav li {
+    float: right;
+    margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+    .nav .navbar-nav {
+        color: red;
+    }
+}
+
+.box {
+    display: flex;
+    align-items: flex-end;
+   
+}
+
 
 

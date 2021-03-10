@@ -274,9 +274,11 @@ table {
   h3 {
     page-break-after: avoid;
   }
-  .navbar {
-    display: none;
-  }
+    .navbar {
+        display: none;
+        text-align: right;
+        
+    }
   .table td,
   .table th {
     background-color: #fff !important;
