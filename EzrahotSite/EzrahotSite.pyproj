@@ -46,7 +46,6 @@
   <ItemGroup>
     <Content Include="EzrahotSite\database.db" />
     <Content Include="EzrahotSite\static\img\404.png" />
-    <Content Include="EzrahotSite\static\img\palit.jpg" />
     <Content Include="EzrahotSite\static\img\spiner.png" />
     <Content Include="EzrahotSite\static\img\Tichonetim.jpg" />
     <Content Include="EzrahotSite\static\scripts\main.js" />

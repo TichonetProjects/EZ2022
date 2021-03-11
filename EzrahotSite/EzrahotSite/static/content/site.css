@@ -98,7 +98,7 @@ footer p{
 [data-component="slideshow"] .slide.active {
     display: block;
 }
-.home-continer{
+.slideshow-continer{
     width:100vw;
     height:90vh;
     display:flex;
@@ -222,4 +222,4 @@ nav {
 }
 
 
-
+    
