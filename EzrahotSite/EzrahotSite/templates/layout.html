@@ -67,39 +67,57 @@
                 }
         }
         }
+
+        table, th, td {
+            border: 0px solid black;
+            border-collapse: collapse;
+        }
+
+            td:hover {
+                background-color: yellow;
+            }
+
+        th, td {
+            padding: 15px;
+            border-right: 3px solid blue;
+            border-left: 3px solid blue;
+            color: black;
+        }
+
+        th {
+            text-align: right;
+        }
     </style>
 
 </head>
 <body>
     <img src="../static/img/Tichonetim.jpg" />
     <nav>
-        <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid" direction: rtl>
-                <div class="topnav">
-                    <li class="nav-item">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a href="{{ url_for('home') }}"><strong style="color:blue">בית</strong></a></li>
-                            <li class="nav-item"><a href="{{ url_for('articlesview') }}"><strong style="color:blue">כתבות</strong></a></li>
-                            <li class="nav-item"><a href="{{ url_for('about') }}"><strong style="color:blue">על</strong></a></li>
-                            <li class="nav-item"><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></li>
-                            {% if current_user.is_authenticated %}
-                            <li><a href="{{ url_for('createArticle') }}"><strong style="color:blue">שלח כתבה</strong></a></li>
-                            {% if current_user.is_admin() %}
-                            <li><a href="{{ url_for('controlPanel') }}"><strong style="color:blue">לוח בקרה</strong></a></li>
-                            {% endif %}
-                            <li><a href="{{ url_for('profile') }}"><strong style="color:blue">פרופיל</strong></a></li>
-                            <li><a href="{{ url_for('logout') }}"><strong style="color:blue">יציאה</strong></a></li>
-                            {% else %}
-                            <li><a href="{{ url_for('login') }}"><strong style="color:blue">כניסה</strong></a></li>
-                            <li><a href="{{ url_for('register') }}"><strong style="color:blue">הרשמה</strong></a></li>
-                            {% endif %}
+        
+        <div class="navbar navbar-default navbar-fixed-top" dir="rtl">
+            <table dir="rtl" , cellspacing="0">
+                <tr>
+                    <td><a href="{{ url_for('home') }}"><strong style="color:blue">בית</strong></a></td>
+                    <td><a href="{{ url_for('home') }}"><strong style="color:blue">כתבות</strong></a></td>
+                    <td><a href="{{ url_for('about') }}"><strong style="color:blue">על</strong></a></td>
+                    <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></td>
 
+                    {% if current_user.is_authenticated %}
+                    <td><a href="{{ url_for('createArticle') }}"><strong style="color:blue">שלח כתבה</strong></a></td>
+                    {% if current_user.is_admin() %}
+                    <td><a href="{{ url_for('controlPanel') }}"><strong style="color:blue">לוח בקרה</strong></a></td>
+                    {% endif %}
+                    <td><a href="{{ url_for('profile') }}"><strong style="color:blue">פרופיל</strong></a></td>
+                    <td><a href="{{ url_for('logout') }}"><strong style="color:blue">יציאה</strong></a></td>
+                    {% else %}
+                    <td><a href="{{ url_for('login') }}"><strong style="color:blue">כניסה</strong></a></td>
+                    <td><a href="{{ url_for('register') }}"><strong style="color:blue">הרשמה</strong></a></td>
+                    {% endif %}
 
-
-                        </ul>
-                </div>
-            </div>
+                </tr>
+            </table>
         </div>
+
 
     </nav>
 
