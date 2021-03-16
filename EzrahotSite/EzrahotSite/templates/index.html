@@ -7,18 +7,20 @@
 <div id="image-slider" class="splide">
     <div class="splide__track">
         <ul class="splide__list">
+            {% for article in articles %}
             <li class="splide__slide">
-                <img src="https://image.shutterstock.com/image-photo/head-labrador-dog-sticking-through-260nw-1139880872.jpg">
+                <img src={{article.thumbnail}}>
             </li>
-            <li class="splide__slide">
-                <img src="https://image.shutterstock.com/image-photo/annoyed-tired-young-man-riding-600w-1529468111.jpg">
-            </li>
-            <li class="splide__slide">
-                <img src="https://image.shutterstock.com/image-photo/girl-pushing-stuck-car-swamp-600w-1094698397.jpg">
-            </li>
+            {% endfor%}
         </ul>
     </div>
 </div>
+
+<script>
+    document.addEventListener( 'DOMContentLoaded', function () {
+	new Splide( '#image-slider' ).mount();
+} );
+</script>
 
 <div class="box" style="align-content:center; direction:rtl;">
     <h3>
