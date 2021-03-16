@@ -2,31 +2,27 @@
 
 {% block content %}
 
-<div class="home-continer">
-    <div id="slideshow-example" data-component="slideshow" class="slideShow">
-        <div role="list">
-            {% for article in articles %}
-            <div class="slide">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style="text-align:right">
-                                <a href="/article/{{article.article_id}}"><h2 style="margin-top: -355px; margin-left: 250px">{{article.heading}}</h2></a>
-                                <h3>{{article.caption}}</h3>
-                            </td>
-                            <td style="text-align:left"><img src="{{article.thumbnail}}" alt="" width="400" height="300"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            {% endfor%}
-        </div>
+<h1 style="text-align:center;">{{home_paragraph}}</h1>
+
+<div id="image-slider" class="splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <li class="splide__slide">
+                <img src="https://image.shutterstock.com/image-photo/head-labrador-dog-sticking-through-260nw-1139880872.jpg">
+            </li>
+            <li class="splide__slide">
+                <img src="https://image.shutterstock.com/image-photo/annoyed-tired-young-man-riding-600w-1529468111.jpg">
+            </li>
+            <li class="splide__slide">
+                <img src="https://image.shutterstock.com/image-photo/girl-pushing-stuck-car-swamp-600w-1094698397.jpg">
+            </li>
+        </ul>
     </div>
 </div>
 
-<div class="box" style="align-content:center">
-    <h3
-          <br />
+<div class="box" style="align-content:center; direction:rtl;">
+    <h3>
+    <br />
     עבדול נאסיר עבר יותר מחודש של התגנבות
     <br />
     דרך גבולות אפגניסטן ואיראן כדי להגיע

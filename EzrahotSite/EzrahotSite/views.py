@@ -155,7 +155,6 @@ def editArticle(index):
 
         db.session.commit()
 
-        print(article.body)
 
         flash('הכתבה עודכנה בהצלחה', 'success')
 
