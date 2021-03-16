@@ -33,7 +33,6 @@
         th {
             text-align: right;
         }
-        }
     </style>
 
 </head>
@@ -45,7 +44,7 @@
             <table dir="rtl" , cellspacing="0">
                 <tr>
                     <td><a href="{{ url_for('home') }}"><strong style="color:blue">בית</strong></a></td>
-                    <td><a href="{{ url_for('home') }}"><strong style="color:blue">כתבות</strong></a></td>
+                    <td><a href="{{ url_for('articlesview') }}"><strong style="color:blue">כתבות</strong></a></td>
                     <td><a href="{{ url_for('about') }}"><strong style="color:blue">על</strong></a></td>
                     <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></td>
 
@@ -60,26 +59,12 @@
                     <td><a href="{{ url_for('login') }}"><strong style="color:blue">כניסה</strong></a></td>
                     <td><a href="{{ url_for('register') }}"><strong style="color:blue">הרשמה</strong></a></td>
                     {% endif %}
-
                 </tr>
             </table>
         </div>
 
 
     </nav>
-
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="/home">בית</a>
-        <a href="/about">על</a>
-        <a href="/contact">צרו קשר</a>
-        <a href="/login">כניסה</a>
-        <a href="/register">הרשמה</a>
-        <a href="/profile">פרופיל</a>
-        <a href="/control-panel">פאנל הבקרה</a>
-    </div>
 
     <br />
     <br />
@@ -122,16 +107,6 @@
         function showContent() {
             spinner.style.display = "none";
             content.style.display = "block";
-
-        }
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.backgroundColor = "white";
         }
     </script>
 </body>
