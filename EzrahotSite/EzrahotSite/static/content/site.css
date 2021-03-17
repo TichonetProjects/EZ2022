@@ -220,6 +220,17 @@ nav {
     align-items: flex-end;
    
 }
+.topics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.grid-continer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "box topics";
+}
 
 
     
