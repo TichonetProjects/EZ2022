@@ -143,3 +143,7 @@ def admin_required(func):
             return app.login_manager.unauthorized()
         return func(*args, **kwargs)
     return decorated_view
+
+
+def clean_string(string):
+    return string.strip()
