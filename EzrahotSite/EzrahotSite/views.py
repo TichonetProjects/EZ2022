@@ -26,7 +26,8 @@ def home():
         'index.html',
         title='Home Page',
         home_paragraph="מערכת עולם זכויות אדם",
-        articles=acceptedArticles
+        articles=acceptedArticles,
+        len = len([article for article in acceptedArticles])
     )
 
 @app.route('/articles-list')
