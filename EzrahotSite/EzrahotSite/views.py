@@ -9,7 +9,7 @@ import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
-from EzrahotSite.models import User, Article, admin_required
+from EzrahotSite.models import User, Article, admin_required, clean_string
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
@@ -71,11 +71,11 @@ def register():
         if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             user = User(
-                first_name=form.first_name.data, 
-                last_name=form.last_name.data, 
-                email=form.email.data, 
+                first_name=clean_string(form.first_name.data), 
+                last_name=clean_string(form.last_name.data), 
+                email=clean_string(form.email.data), 
                 password=hashed_password, 
-                school_class=form.school_class.data, 
+                school_class=clean_string(form.school_class.data), 
                 user_type="NOT_APPROVED")
 
             db.session.add(user)
@@ -148,10 +148,10 @@ def editArticle(index):
 
 
     if form.validate_on_submit():
-        article.heading = form.heading.data
-        article.body = form.body.data
-        article.caption = form.caption.data
-        article.thumbnail = form.thumbnail.data
+        article.heading = clean_string(form.heading.data)
+        article.body = clean_string(form.body.data)
+        article.caption = clean_string(form.caption.data)
+        article.thumbnail = clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no"
   
 
         db.session.commit()
@@ -176,14 +176,14 @@ def createArticle():
     form = SubmitArticle()
     if form.validate_on_submit():
         article = Article(
-            heading=form.heading.data,
-            body=form.body.data,
+            heading=clean_string(form.heading.data),
+            body=clean_string(form.body.data),
             post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
             accept_date=None,
             is_accepted=False,
             author_id=current_user.get_id(),
-            caption=form.caption.data,
-            thumbnail=form.thumbnail.data)
+            caption=clean_string(form.caption.data),
+            thumbnail=clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no")
 
         db.session.add(article)
         db.session.commit()
