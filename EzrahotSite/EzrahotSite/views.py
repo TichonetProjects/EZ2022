@@ -20,14 +20,14 @@ from flask_misaka import markdown
 @app.route('/home')
 def home():
     """renders the home page with all accepted articles"""
-    acceptedArticles = Article.get_all_accepted()
+    acceptedArticles = Article.get_all_accepted()[:10]
 
     return render_template(
         'index.html',
         title='Home Page',
         home_paragraph="מערכת עולם זכויות אדם",
         articles=acceptedArticles,
-        len = len([article for article in acceptedArticles])
+        len = len(acceptedArticles)
     )
 
 @app.route('/articles-list')
