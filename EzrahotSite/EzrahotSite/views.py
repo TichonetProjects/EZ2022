@@ -276,4 +276,4 @@ def articles(index):
 
 @app.errorhandler(404)
 def not_found(exc):
-    return Response(render_template('404.html', title="Page Not Found")), 404
+    return Response(render_template('404.html', title="Page Not Found", text="404: העמוד לא נמצא :(")), 404

@@ -33,16 +33,11 @@
         th {
             text-align: right;
         }
-
-        .splide__slide img {
-            width : 100%;
-            height: auto;
-        }
     </style>
 
 </head>
 <body>
-    <img src="/static/img/Tichonetim.jpg" width="57%" style="margin-top: -50px;" />
+    <img src="/static/img/Tichonetim.jpg" width="57%" style="margin-top: -50px; cursor:pointer;" onclick="window.location.href = '/';" />
     <nav>
 
         <div class="navbar navbar-default navbar-fixed-top" dir="rtl">
@@ -67,12 +62,7 @@
                 </tr>
             </table>
         </div>
-
-
     </nav>
-
-    <br />
-    <br />
 
     <div class="main-div">
 
@@ -100,7 +90,6 @@
     <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="/static/scripts/respond.js"></script>
-    <script src="/static/scripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
     {% block scripts %}{% endblock %}
 
