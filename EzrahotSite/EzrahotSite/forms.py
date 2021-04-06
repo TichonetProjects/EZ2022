@@ -35,8 +35,7 @@ class SubmitArticle(FlaskForm):
                             validators=[DataRequired()])
     caption = StringField('כותרת משנה',
                             validators=[DataRequired()])
-    thumbnail = StringField('תמונת כיסוי',
-                            validators=[DataRequired()])
+    thumbnail = StringField('תמונת כיסוי')
     body = MdeField('תוכן הכתבה', 
                     validators=[InputRequired("Input required")])
     submit = SubmitField('שליחה')
