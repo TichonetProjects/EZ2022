@@ -54,8 +54,8 @@ def about():
     """renders the about page."""
     return render_template(
         'about.html',
-        title='About',
-        message='Your application description page.',
+        title='עיתון זכויות האדם של תיכונט',
+        message='עיתון ווירטואלי זה הוא עיתון בנושא זכויות האדם הנכתב על ידי תלמידי מגמת האזרחות של תיכונט ונוצר על ידי מגמת מדעי המחשב של תיכונט. (לא סופי)',
     )
 
 @app.route('/devteam')
