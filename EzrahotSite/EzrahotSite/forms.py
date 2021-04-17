@@ -38,4 +38,4 @@ class SubmitArticle(FlaskForm):
     thumbnail = StringField('תמונת כיסוי')
     body = MdeField('תוכן הכתבה', 
                     validators=[InputRequired("Input required")])
-    submit = SubmitField('שליחה')
+    submit = SubmitField('צור כתבה')

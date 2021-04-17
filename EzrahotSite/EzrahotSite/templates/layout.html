@@ -49,11 +49,10 @@
                     <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></td>
 
                     {% if current_user.is_authenticated %}
-                    <td><a href="{{ url_for('createArticle') }}"><strong style="color:blue">שלח כתבה</strong></a></td>
                     {% if current_user.is_admin() %}
                     <td><a href="{{ url_for('controlPanel') }}"><strong style="color:blue">לוח בקרה</strong></a></td>
                     {% endif %}
-                    <td><a href="{{ url_for('profile') }}"><strong style="color:blue">פרופיל</strong></a></td>
+                    <td><a href="{{ url_for('profile') }}"><strong style="color:blue">עמוד כתב</strong></a></td>
                     <td><a href="{{ url_for('logout') }}"><strong style="color:blue">יציאה</strong></a></td>
                     {% else %}
                     <td><a href="{{ url_for('login') }}"><strong style="color:blue">כניסה</strong></a></td>

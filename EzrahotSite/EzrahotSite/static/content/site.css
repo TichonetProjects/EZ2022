@@ -225,4 +225,8 @@ nav {
 .carousel{
     height: 50%;
 }
-    
+.control-btn{
+    display: flex;
+    font-size: 12pt;
+    text-align: center;
+}
