@@ -27,7 +27,9 @@
 </div>
 {% endfor %}
 
-{% for index in pages %}
-<h1><a href="/articles-list/{{index}}"> {{index}} </a></h1>
-{% endfor %}
+<div class="page-numbers">
+    {% for index in pages %}
+    <h1><a href="/articles-list/{{index}}"> {{index}} </a></h1>
+    {% endfor %}
+</div>
 {% endblock %}
