@@ -30,9 +30,11 @@ def home():
         len = len(acceptedArticles)
     )
 
-@app.route('/articles-list')
-def articlesview():
-    acceptedArticles = Article.get_all_accepted()
+@app.route('/articles-list/<index>/')
+@app.route('/articles-list/')
+def articlesview(index=0):
+    index = int(index)
+    acceptedArticles = Article.get_all_accepted()[index*10:(index+1)*10]
 
     return render_template(
         'articlesview.html',
