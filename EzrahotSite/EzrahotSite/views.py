@@ -34,12 +34,14 @@ def home():
 @app.route('/articles-list/')
 def articlesview(index=0):
     index = int(index)
-    acceptedArticles = Article.get_all_accepted()[index*10:(index+1)*10]
+    articles_in_page = 10
+    acceptedArticles = list(Article.get_all_accepted())
+    # pages count = (len(acceptedArticles)/articles_in_page) + 1
 
     return render_template(
         'articlesview.html',
         title='Articles',
-        articles=acceptedArticles
+        articles=acceptedArticles[index*articles_in_page:(index+1)*articles_in_page]
     )
 
 @app.route('/contact')
