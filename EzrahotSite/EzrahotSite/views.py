@@ -32,17 +32,17 @@ def home():
 
 @app.route('/articles-list/<index>/')
 @app.route('/articles-list/')
-def articlesview(index=0):
-    index = int(index)
-    articles_in_page = 10
+def articlesview(index=1):
+    index = int(index)-1
+    articles_in_page = 5
     acceptedArticles = list(Article.get_all_accepted())
-    pages_count = (len(acceptedArticles)/articles_in_page) + 1
+    pages_count = int(len(acceptedArticles)/articles_in_page) + 1
 
     return render_template(
         'articlesview.html',
         title='Articles',
         articles=acceptedArticles[index*articles_in_page:(index+1)*articles_in_page],
-        pages=pages_count
+        pages=map(lambda n:n+1, range(pages_count))
     )
 
 @app.route('/contact')
