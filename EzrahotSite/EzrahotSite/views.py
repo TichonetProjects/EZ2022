@@ -36,12 +36,13 @@ def articlesview(index=0):
     index = int(index)
     articles_in_page = 10
     acceptedArticles = list(Article.get_all_accepted())
-    # pages count = (len(acceptedArticles)/articles_in_page) + 1
+    pages_count = (len(acceptedArticles)/articles_in_page) + 1
 
     return render_template(
         'articlesview.html',
         title='Articles',
-        articles=acceptedArticles[index*articles_in_page:(index+1)*articles_in_page]
+        articles=acceptedArticles[index*articles_in_page:(index+1)*articles_in_page],
+        pages=pages_count
     )
 
 @app.route('/contact')
