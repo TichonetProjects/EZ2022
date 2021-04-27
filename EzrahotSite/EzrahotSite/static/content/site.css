@@ -230,3 +230,12 @@ nav {
     font-size: 12pt;
     text-align: center;
 }
+.page-numbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-numbers h1 {
+    font-size: 16pt;
+    margin-left: 5px;
+}
