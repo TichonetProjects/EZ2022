@@ -239,3 +239,10 @@ nav {
     font-size: 16pt;
     margin-left: 5px;
 }
+.btn-outline-info {
+    border-color: #0000FF !important;
+    color: #0000FF !important;
+}
+.btn-outline-info:hover {
+    background-color: #FFFF00 !important;
+}

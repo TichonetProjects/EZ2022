@@ -207,7 +207,7 @@ def controlPanel():
     inactiveUsers = User.get_all_inactive()
     inactiveArticles = Article.get_all_unaccepted()
 
-    return render_template('controlPanel.html',  title="פאנל מנהלים", inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
+    return render_template('controlPanel.html',  title="פאנל מנהלים", inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles, userstitle="אישור משתמשים", nousers="אין משתמשים שממתינים לאישור", articlestitle="אישור כתבות", noarticles="אין כתבות שממתינות לאישור")
 
 
 """
@@ -247,7 +247,7 @@ def acceptArticle(index):
         article.accept_article()
     
     next_page = request.args.get('next')
-    return redirect(next_page) if next_page else redirect(url_for('home'))
+    return redirect(next_page) if next_page else redirect(url_for('articlesview'))
 
 @app.route("/deletearticle/<index>", methods=['GET', 'POST'])
 @login_required
@@ -259,7 +259,7 @@ def deleteArticle(index):
         article.delete_article()
 
     next_page = request.args.get('next')
-    return redirect(next_page) if next_page else redirect(url_for('home'))
+    return redirect(next_page) if next_page else redirect(url_for('articlesview'))
 
 @app.route('/article/<index>/')
 def articles(index):
