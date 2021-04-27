@@ -5,7 +5,7 @@
 <div style="border-bottom: black 2px solid">
     <h2>{{userstitle}}</h2>
     {% if not inactiveUsers %}
-    <h3>{{nousers}}</h3>
+    <h3>{{nousers}}</h3><br>
     {%endif%}
     {% for inactiveUser in inactiveUsers %}
     <h3>{{inactiveUser.first_name}} {{inactiveUser.last_name}}</h3>
@@ -21,9 +21,9 @@
     {% endfor%}
 </div>
 <div>
-    <h2>{{articlestitle}}</h2>
+    <br><h2>{{articlestitle}}</h2>
     {% if not inactiveArticles %}
-    <h3>{{noarticles}}</h3>
+    <h3>{{noarticles}}</h3><br>
     {%endif%}
     {% for inactiveArticle in inactiveArticles %}
     <a href="article/{{inactiveArticle.article_id}}" target="_blank"><h3>{{inactiveArticle.heading}}</h3></a>

@@ -204,8 +204,8 @@ def createArticle():
 @login_required
 @admin_required
 def controlPanel():
-    inactiveUsers = User.get_all_inactive()
-    inactiveArticles = Article.get_all_unaccepted()
+    inactiveUsers = list(User.get_all_inactive())
+    inactiveArticles = list(Article.get_all_unaccepted())
 
     return render_template('controlPanel.html',  title="פאנל מנהלים", inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles, userstitle="אישור משתמשים", nousers="אין משתמשים שממתינים לאישור", articlestitle="אישור כתבות", noarticles="אין כתבות שממתינות לאישור")
 
