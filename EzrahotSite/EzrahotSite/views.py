@@ -24,7 +24,7 @@ def home():
 
     return render_template(
         'index.html',
-        title='Home Page',
+        title='עמוד הבית',
         home_paragraph="מערכת עולם זכויות אדם",
         articles=acceptedArticles,
         len = len(acceptedArticles)
@@ -40,7 +40,7 @@ def articlesview(index=1):
 
     return render_template(
         'articlesview.html',
-        title='Articles',
+        title='רשימת הכתבות',
         articles=acceptedArticles[index*articles_in_page:(index+1)*articles_in_page],
         pages=map(lambda n:n+1, range(pages_count))
     )
@@ -50,7 +50,7 @@ def contact():
     """renders the contact page."""
     return render_template(
         'contact.html',
-        title='Contact',
+        title='צרו קשר',
         message='Your contact page.'
     )
 
@@ -59,13 +59,13 @@ def about():
     """renders the about page."""
     return render_template(
         'about.html',
-        title='עיתון זכויות האדם של תיכונט',
+        title='לגבי',
         message='עיתון ווירטואלי זה הוא עיתון בנושא זכויות האדם הנכתב על ידי תלמידי מגמת האזרחות של תיכונט ונוצר על ידי מגמת מדעי המחשב של תיכונט. (לא סופי)',
     )
 
 @app.route('/devteam')
 def devteam():
-    return render_template('devteam.html', title="Develpment Team")
+    return render_template('devteam.html', title="צוות הפיתוח")
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -93,7 +93,7 @@ def register():
         return render_template(
         'register.html',
         title='Register',
-        message='Resgister Page.',
+        message='דף הירשמות',
         form = form
     )
 
@@ -118,7 +118,7 @@ def login():
 
     return render_template(
         'login.html',
-        title='Login',
+        title='דף כניסה',
         
         message='Login Page.',
         form=form
@@ -130,7 +130,7 @@ def profile():
     user_articles = Article.get_all_user(current_user.user_id)
     return render_template(
         'profile.html',
-        title='Profile',
+        title='עמוד כתב',
         message='Profile Page.',
         user_articles=user_articles
     )
@@ -173,7 +173,7 @@ def editArticle(index):
         form.thumbnail.data = article.thumbnail
 
     print(request.method)
-    return render_template('submitArticle.html',  form=form)
+    return render_template('submitArticle.html',  title="ערוך כתבה", form=form)
 
 @app.route('/create-article/', methods=['GET', 'POST'])
 @login_required
@@ -197,7 +197,7 @@ def createArticle():
 
         return redirect(url_for('articles', index=article.article_id))
 
-    return render_template('submitArticle.html', form=form)
+    return render_template('submitArticle.html', title="צור כתבה חדשה", form=form)
 
 
 @app.route('/control-panel')
@@ -207,7 +207,7 @@ def controlPanel():
     inactiveUsers = User.get_all_inactive()
     inactiveArticles = Article.get_all_unaccepted()
 
-    return render_template('controlPanel.html',  inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
+    return render_template('controlPanel.html',  title="פאנל מנהלים", inactiveUsers = inactiveUsers, inactiveArticles = inactiveArticles)
 
 
 """
@@ -274,11 +274,11 @@ def articles(index):
 
     author = article.get_author()
     return render_template('articles.html', 
-                         
+                        title=article.heading,
                         article=article,
                         articleBody=md.render(article.body),
                         articleAuthor=f"{author.first_name} {author.last_name}, {author.school_class}")
 
 @app.errorhandler(404)
 def not_found(exc):
-    return Response(render_template('404.html', title="Page Not Found", text="404: העמוד לא נמצא :(")), 404
+    return Response(render_template('404.html', title="עמוד לא נמצא", text="404: העמוד לא נמצא :(")), 404
