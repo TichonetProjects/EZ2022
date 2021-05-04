@@ -46,7 +46,7 @@
                     <button style="width:30px; height:30px; margin-left:5px;" type="submit"><i class="fas fa-edit"></i></button>
                 </form>
                 <form action="/deletearticle/{{article.article_id}}" method="post">
-                    <button style="width:30px; height:30px;" type="submit"><i class="fas fa-times"></i></button>
+                    <button style="width:30px; height:30px;" type="submit" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i></button>
                 </form>
             </div>
             
@@ -61,4 +61,25 @@
     </div>
     {%endfor%}
 </div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">זהירות!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          הפעולה הבאה תתעשה שינוי בלתי הפיך. האם אתם בטוחים?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">לא</button>
+          <button type="button" class="btn btn-primary">כן</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
