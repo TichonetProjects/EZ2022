@@ -150,7 +150,7 @@ def editArticle(index):
         abort(404, description="Resource not found")
     
     form = SubmitArticle()
-
+    form.submit.label.text = "שמור שינויים"
 
     if form.validate_on_submit():
         article.heading = clean_string(form.heading.data)
