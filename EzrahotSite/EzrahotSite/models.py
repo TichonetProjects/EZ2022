@@ -7,6 +7,7 @@ from datetime import datetime
 from flask_login import current_user
 from functools import wraps
 from flask import request, redirect, url_for, flash
+from flask_mail import Message
 
 
 @login_manager.user_loader
@@ -93,6 +94,9 @@ class Article(db.Model):
         """returns if article is accepted"""
         return self.is_accepted
 
+    def get_url(self):
+        return f"tichonet.net/article/{self.article_id}"
+
     def get_author(self):
         """returns author user object"""
         return User.query.get(self.author_id)
@@ -131,7 +135,16 @@ class Article(db.Model):
         """deletes article and commits to db"""
         db.session.delete(self)
         db.session.commit()
+
+
+def acceptArticleMessage(article):
+    article_author = article.get_author()
+    message = Message(f"הכתבה שלך אושרה! {article.heading}", sender="ezrahotsite@gmail.com", recipients=[article_author.email])
     
+    message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url)
+    message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url)
+
+    return message
 
 """function decorator for admin only pages"""
 """TODO currently calls unauthorized if not admin instead of custom stuff but we are lazy :3"""

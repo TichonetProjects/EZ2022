@@ -4,16 +4,17 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash, Response, abort
-from EzrahotSite import app, db, bcrypt, md
+from EzrahotSite import app, db, bcrypt, md, mail
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
-from EzrahotSite.models import User, Article, admin_required, clean_string
+from EzrahotSite.models import User, Article, admin_required, clean_string, acceptArticleMessage
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
 from flask_misaka import markdown
+from flask_mail import Mail, Message
 
 
 @app.route('/')
@@ -245,7 +246,9 @@ def acceptArticle(index):
 
     if article:
         article.accept_article()
-    
+        msg = acceptArticleMessage(article)
+        mail.send(msg)
+
     next_page = request.args.get('next')
     return redirect(next_page) if next_page else redirect(url_for('articlesview'))
 
