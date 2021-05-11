@@ -31,7 +31,8 @@ class User(db.Model):
 
     # article = db.relationship("Article")
 
-
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def is_active(self):
         """returns if user type is anything else than NOT_APPROVED"""
@@ -58,6 +59,8 @@ class User(db.Model):
         """returns all users who are not approved"""
         return (User.query.filter_by(user_type = "NOT_APPROVED"))
             
+    def get_all_admins():
+        return (User.query.filter_by(user_type = "ADMIN"))
 
     def accept_user(self):
         """accepts the user and commits to db"""
@@ -141,8 +144,44 @@ def acceptArticleMessage(article):
     article_author = article.get_author()
     message = Message(f"הכתבה שלך אושרה! {article.heading}", sender="ezrahotsite@gmail.com", recipients=[article_author.email])
     
-    message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url)
-    message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url)
+    message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url())
+    message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url())
+
+    return message
+
+def acceptUserMessage(user):
+    message = Message(f"המשתמש שלך אושר!", sender="ezrahotsite@gmail.com", recipients=[user.email])
+    
+    message.body = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.net/login")
+    message.html = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.net/login")
+
+    return message
+
+def newUserMessage(user):
+    message = Message(f"משתמש חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    
+    message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+    message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+
+    return message
+
+def newArticleMessage(article):
+    message = Message(f"כתבה חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    
+    article_author = article.get_author()
+
+    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+
+    return message
+
+def editArticleMessage(article):
+    message = Message(f"כתבה חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    
+    article_author = article.get_author()
+
+    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
 
     return message
 

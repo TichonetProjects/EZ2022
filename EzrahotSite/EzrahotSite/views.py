@@ -9,7 +9,7 @@ import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
-from EzrahotSite.models import User, Article, admin_required, clean_string, acceptArticleMessage
+from EzrahotSite.models import User, Article, admin_required, clean_string, acceptArticleMessage, acceptUserMessage, newArticleMessage, newUserMessage
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
@@ -83,6 +83,9 @@ def register():
                 password=hashed_password, 
                 school_class=clean_string(form.school_class.data), 
                 user_type="NOT_APPROVED")
+
+            msg = newUserMessage(user)
+            mail.send(msg)
 
             db.session.add(user)
             db.session.commit()
@@ -191,6 +194,9 @@ def createArticle():
             caption=clean_string(form.caption.data),
             thumbnail=clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no")
 
+        msg = newArticleMessage(article)
+        mail.send(msg)
+
         db.session.add(article)
         db.session.commit()
 
@@ -222,6 +228,8 @@ def acceptUser(index):
     
     if user:
         user.accept_user()
+        msg = acceptUserMessage(user)
+        mail.send(msg)
     
     next_page = request.args.get('next')
     return redirect(url_for('controlPanel'))
