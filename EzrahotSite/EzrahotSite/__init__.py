@@ -20,7 +20,7 @@ app.config['SIMPLEMDE_USE_CDN'] = True
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'ezrahotsite@gmail.com'
-app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_PASSWORD'] = 'GadOhad1234'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 

@@ -144,8 +144,8 @@ def acceptArticleMessage(article):
     article_author = article.get_author()
     message = Message(f"הכתבה שלך אושרה! {article.heading}", sender="ezrahotsite@gmail.com", recipients=[article_author.email])
     
-    message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url())
-    message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url())
+    message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחצו כאן {}.'.format(article.heading, article.get_url())
+    message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחצו כאן {}.'.format(article.heading, article.get_url())
 
     return message
 
@@ -158,30 +158,20 @@ def acceptUserMessage(user):
     return message
 
 def newUserMessage(user):
-    message = Message(f"משתמש חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    message = Message(f"משתמש חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[user.email for user in User.get_all_admins()])
     
-    message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
-    message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+    message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+    message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
 
     return message
 
 def newArticleMessage(article):
-    message = Message(f"כתבה חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    message = Message(f"כתבה חדשה מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[user.email for user in User.get_all_admins()])
     
     article_author = article.get_author()
 
-    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
-    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
-
-    return message
-
-def editArticleMessage(article):
-    message = Message(f"כתבה חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
-    
-    article_author = article.get_author()
-
-    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
-    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
 
     return message
 

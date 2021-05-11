@@ -84,11 +84,12 @@ def register():
                 school_class=clean_string(form.school_class.data), 
                 user_type="NOT_APPROVED")
 
+            db.session.add(user)
+            db.session.commit()
+
             msg = newUserMessage(user)
             mail.send(msg)
 
-            db.session.add(user)
-            db.session.commit()
 
             flash('המשתמש נוצר בהצלחה. המתן לאישורו, לאחר האישור יהיה ניתן להתחבר עם המשתמש לאתר.', 'success')
 
@@ -194,11 +195,11 @@ def createArticle():
             caption=clean_string(form.caption.data),
             thumbnail=clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no")
 
-        msg = newArticleMessage(article)
-        mail.send(msg)
-
         db.session.add(article)
         db.session.commit()
+
+        msg = newArticleMessage(article)
+        mail.send(msg)
 
         flash('הכתבה נוצרה בהצלחה וממתינה לאישור מנהל.', 'success')
 
