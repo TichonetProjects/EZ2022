@@ -7,6 +7,7 @@ from datetime import datetime
 from flask_login import current_user
 from functools import wraps
 from flask import request, redirect, url_for, flash
+from flask_mail import Message
 
 
 @login_manager.user_loader
@@ -30,7 +31,8 @@ class User(db.Model):
 
     # article = db.relationship("Article")
 
-
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def is_active(self):
         """returns if user type is anything else than NOT_APPROVED"""
@@ -57,6 +59,8 @@ class User(db.Model):
         """returns all users who are not approved"""
         return (User.query.filter_by(user_type = "NOT_APPROVED"))
             
+    def get_all_admins():
+        return (User.query.filter_by(user_type = "ADMIN"))
 
     def accept_user(self):
         """accepts the user and commits to db"""
@@ -92,6 +96,9 @@ class Article(db.Model):
     def is_active(self):
         """returns if article is accepted"""
         return self.is_accepted
+
+    def get_url(self):
+        return f"tichonet.net/article/{self.article_id}"
 
     def get_author(self):
         """returns author user object"""
@@ -131,7 +138,52 @@ class Article(db.Model):
         """deletes article and commits to db"""
         db.session.delete(self)
         db.session.commit()
+
+
+def acceptArticleMessage(article):
+    article_author = article.get_author()
+    message = Message(f"הכתבה שלך אושרה! {article.heading}", sender="ezrahotsite@gmail.com", recipients=[article_author.email])
     
+    message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url())
+    message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחץ כאן {}.'.format(article.heading, article.get_url())
+
+    return message
+
+def acceptUserMessage(user):
+    message = Message(f"המשתמש שלך אושר!", sender="ezrahotsite@gmail.com", recipients=[user.email])
+    
+    message.body = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.net/login")
+    message.html = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.net/login")
+
+    return message
+
+def newUserMessage(user):
+    message = Message(f"משתמש חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    
+    message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+    message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+
+    return message
+
+def newArticleMessage(article):
+    message = Message(f"כתבה חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    
+    article_author = article.get_author()
+
+    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+
+    return message
+
+def editArticleMessage(article):
+    message = Message(f"כתבה חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[map(lambda user : user.email, User.get_all_admins())])
+    
+    article_author = article.get_author()
+
+    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחץ כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+
+    return message
 
 """function decorator for admin only pages"""
 """TODO currently calls unauthorized if not admin instead of custom stuff but we are lazy :3"""

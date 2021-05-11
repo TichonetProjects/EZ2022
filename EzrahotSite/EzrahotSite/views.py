@@ -4,16 +4,17 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash, Response, abort
-from EzrahotSite import app, db, bcrypt, md
+from EzrahotSite import app, db, bcrypt, md, mail
 import sqlite3
 from sqlite3 import Error
 from flask_login import login_user, current_user, logout_user, login_required
 
-from EzrahotSite.models import User, Article, admin_required, clean_string
+from EzrahotSite.models import User, Article, admin_required, clean_string, acceptArticleMessage, acceptUserMessage, newArticleMessage, newUserMessage
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
 from flask_misaka import markdown
+from flask_mail import Mail, Message
 
 
 @app.route('/')
@@ -83,6 +84,9 @@ def register():
                 school_class=clean_string(form.school_class.data), 
                 user_type="NOT_APPROVED")
 
+            msg = newUserMessage(user)
+            mail.send(msg)
+
             db.session.add(user)
             db.session.commit()
 
@@ -150,7 +154,7 @@ def editArticle(index):
         abort(404, description="Resource not found")
     
     form = SubmitArticle()
-
+    form.submit.label.text = "שמור שינויים"
 
     if form.validate_on_submit():
         article.heading = clean_string(form.heading.data)
@@ -190,6 +194,9 @@ def createArticle():
             caption=clean_string(form.caption.data),
             thumbnail=clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no")
 
+        msg = newArticleMessage(article)
+        mail.send(msg)
+
         db.session.add(article)
         db.session.commit()
 
@@ -221,6 +228,8 @@ def acceptUser(index):
     
     if user:
         user.accept_user()
+        msg = acceptUserMessage(user)
+        mail.send(msg)
     
     next_page = request.args.get('next')
     return redirect(url_for('controlPanel'))
@@ -245,7 +254,9 @@ def acceptArticle(index):
 
     if article:
         article.accept_article()
-    
+        msg = acceptArticleMessage(article)
+        mail.send(msg)
+
     next_page = request.args.get('next')
     return redirect(next_page) if next_page else redirect(url_for('articlesview'))
 
