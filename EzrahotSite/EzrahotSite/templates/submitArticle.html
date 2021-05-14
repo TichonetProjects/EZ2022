@@ -1,9 +1,11 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
 
 {% block content %}
 <head>
     {{mde.css}}
 </head>
+<br />
+<br />
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -60,7 +62,7 @@
                 {{ form.body(class="form-control form-control-lg") }}
                 {% endif %}
                  
-                <h1 style="text-decoration:underline">Preview</h1>
+                <h1 style="text-decoration:underline">תצוגה מקדימה</h1>
                 {{mde.preview}}
 
             </div>
