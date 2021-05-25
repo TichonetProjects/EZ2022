@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="border-bottom: black 2px solid">
+    <h2>{{userstitle}}</h2>
+    {% if not inactiveUsers %}
+    <h3>{{nousers}}</h3><br>
+    {%endif%}
+    {% for inactiveUser in inactiveUsers %}
+    <h3>{{inactiveUser.first_name}} {{inactiveUser.last_name}}</h3>
+    <div class="control-btn">
+        <form action="/deleteuser/{{inactiveUser.user_id}}" method="post">
+            <button style="width:30px; height:30px; margin-left:5px;" type="submit"><i class="fas fa-times"></i></button>
+        </form>
+        <form action="/acceptuser/{{inactiveUser.user_id}}" method="post">
+            <button style="width:30px; height:30px;" type="submit"><i class="fas fa-check"></i></button>
+        </form>
+        <br />
+    </div>
+    {% endfor%}
+</div>
+<div>
+    <br><h2>{{articlestitle}}</h2>
+    {% if not inactiveArticles %}
+    <h3>{{noarticles}}</h3><br>
+    {%endif%}
+    {% for inactiveArticle in inactiveArticles %}
+    <a href="article/{{inactiveArticle.article_id}}" target="_blank"><h3>{{inactiveArticle.heading}}</h3></a>
+    <div class="control-btn">
+        <form action="/deletearticle/{{inactiveArticle.article_id}}" method="post">
+            <button style="width:30px; height:30px; margin-left:5px;" type="submit"><i class="fas fa-times"></i></button>
+        </form>
+        <form action="/acceptarticle/{{inactiveArticle.article_id}}" method="post">
+            <button style="width:30px; height:30px;" type="submit" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-check"> </i></button>
+        </form>
+        <br />
+    </div>
+    {% endfor%}
+</div> 
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">זהירות!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          הפעולה הבאה תתעשה שינוי בלתי הפיך. האם אתם בטוחים?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">לא</button>
+          <button type="button" class="btn btn-primary">כן</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
