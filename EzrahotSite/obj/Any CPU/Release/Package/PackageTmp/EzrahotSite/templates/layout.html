@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עיתון זכויות האדם - {{ title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.rtl.min.css" integrity="sha384-4dNpRvNX0c/TdYEbYup8qbjvjaMrgUPh+g4I03CnNtANuv+VAvPL6LqdwzZKV38G" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.css" rel="stylesheet">
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+
+
+    <style>
+        table, th, td {
+            border: 0px solid black;
+            border-collapse: collapse;
+        }
+
+            td:hover {
+                background-color: yellow;
+            }
+
+        th, td {
+            padding: 15px;
+            border-right: 3px solid blue;
+            border-left: 3px solid blue;
+            color: black;
+        }
+
+        th {
+            text-align: right;
+        }
+    </style>
+
+</head>
+<body>
+    <img src="/static/img/Tichonetim.jpg" width="57%" style="margin-top: -50px; cursor:pointer;" onclick="window.location.href = '/';" />
+    <br />
+    <br />
+    <nav>
+        <div class="navbar navbar-default navbar-fixed-top" dir="rtl" style="position:absolute; top:10%;">
+            <table dir="rtl" , cellspacing="0">
+                <tr>
+                    <img src="../static/img/WhatsApp Image 2021-04-27 at 17.31.23 (1).jpeg" width="50px" style="margin-left: -25%; cursor:pointer;" onclick="window.location.href = '/';" />
+                    <td><a href="{{ url_for('home') }}"><strong style="color:blue">בית</strong></a></td>
+                    <td><a href="{{ url_for('articlesview') }}"><strong style="color:blue">כתבות</strong></a></td>
+                    <td><a href="{{ url_for('about') }}"><strong style="color:blue">אודות</strong></a></td>
+                    <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></td>
+
+                    {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin() %}
+                    <td><a href="{{ url_for('controlPanel') }}"><strong style="color:blue">לוח בקרה</strong></a></td>
+                    {% endif %}
+                    <td><a href="{{ url_for('profile') }}"><strong style="color:blue">עמוד כתב</strong></a></td>
+                    <td><a href="{{ url_for('logout') }}"><strong style="color:blue">יציאה</strong></a></td>
+                    {% else %}
+                    <td><a href="{{ url_for('login') }}"><strong style="color:blue">כניסה</strong></a></td>
+                    <td><a href="{{ url_for('register') }}"><strong style="color:blue">הרשמה</strong></a></td>
+                    {% endif %}
+                    
+                </tr>
+            </table>
+        </div>
+    </nav>
+    <div class="main-div">
+
+        <img class="spinner" id="spinner" src="/static/img/spiner.png" />
+
+        <div style="display:none" class="container body-content" id="content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+            <hr />
+            <footer>
+                <p>נבנה על ידי מגמת מדעי המחשב, תיכונט, תשפ"א </p>
+                <p>&copy; כל הזכויות שמורות</p>
+                <a href={{ url_for('devteam') }}><p>קישור לצוות</p></a>
+            </footer>
+        </div>
+    </div>
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    {% block scripts %}{% endblock %}
+
+    <script>
+        const content = document.querySelector("#content");
+        const loader = document.querySelector("#spinner");
+
+        const timeOut = setTimeout(showContent, 1000);
+
+        function showContent() {
+            spinner.style.display = "none";
+            content.style.display = "block";
+        };
+    </script>
+</body>
+</html>

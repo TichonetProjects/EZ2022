@@ -1,0 +1,9 @@
+Flask~=1.1
+flask-login
+flask-wtf
+flask-bcrypt
+flask-sqlalchemy
+Flask-Misaka
+flask_simplemde
+email-validator
+Flask-MDE

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<body style="direction: rtl; display:flex; flex-direction:column;">
+    <h2><b>{{article.heading}}</b></h2>
+    <br>
+    <h3>{{article.caption}}</h3>
+    <br>
+    <h3>{{articleAuthor}}</h3>
+    <br>
+    <h4 class="articleBody">{{articleBody}}</h4>
+</body>
+{% endblock %}

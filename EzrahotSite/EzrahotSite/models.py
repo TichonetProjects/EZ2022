@@ -100,7 +100,7 @@ class Article(db.Model):
 
     def get_url(self):
         """returns the article's url"""
-        return f"tichonet.net/article/{self.article_id}"
+        return f"tichonet.co.il/article/{self.article_id}"
 
     def get_author(self):
         """returns author user object"""
@@ -112,7 +112,7 @@ class Article(db.Model):
 
     def get_body(self, length, three_dots = False):
         "returns article body (without markdown)"
-        return md.render(self.body[:length] + ("..." if three_dots else ""))
+        return self.body[:length] + ("..." if three_dots else "")
 
     def get_all_articles():
         """returns all articles"""
@@ -158,8 +158,8 @@ def acceptUserMessage(user):
     """create a new message object and fill it with a predefined template with the user's credentials"""
     message = Message(f"המשתמש שלך אושר!", sender="ezrahotsite@gmail.com", recipients=[user.email])
     
-    message.body = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.net/login")
-    message.html = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.net/login")
+    message.body = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.co.il/login")
+    message.html = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.co.il/login")
 
     return message
 
@@ -168,8 +168,8 @@ def newUserMessage(user):
     """create a new message object and fill it with a predefined template with the user's credentials"""
     message = Message(f"משתמש חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[user.email for user in User.get_all_admins()])
     
-    message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
-    message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.net/acceptuser/{user.user_id}")
+    message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.co.il/acceptuser/{user.user_id}")
+    message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.co.il/acceptuser/{user.user_id}")
 
     return message
 
@@ -180,8 +180,8 @@ def newArticleMessage(article):
     
     article_author = article.get_author()
 
-    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
-    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.net/acceptarticle/{article.article_id}")
+    message.body = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.co.il/acceptarticle/{article.article_id}")
+    message.html = 'הכתבה "{}" על ידי {} מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(article.heading, article_author.get_full_name(), f"tichonet.co.il/acceptarticle/{article.article_id}")
 
     return message
 

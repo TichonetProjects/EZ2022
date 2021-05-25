@@ -13,7 +13,6 @@ from EzrahotSite.models import User, Article, admin_required, clean_string, acce
 
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
-from flask_misaka import markdown
 from flask_mail import Mail, Message
 
 
@@ -54,15 +53,6 @@ def contact():
         'contact.html',
         title='צרו קשר',
         message='Your contact page.'
-    )
-
-@app.route('/about')
-def about():
-    """renders the about page."""
-    return render_template(
-        'about.html',
-        title='לגבי',
-        message='עיתון ווירטואלי זה הוא עיתון בנושא זכויות האדם הנכתב על ידי תלמידי מגמת האזרחות של תיכונט ונוצר על ידי מגמת מדעי המחשב של תיכונט. (לא סופי)',
     )
 
 @app.route('/devteam')
@@ -299,7 +289,7 @@ def articles(index):
     return render_template('articles.html', 
                         title=article.heading,
                         article=article,
-                        articleBody=md.render(article.body),
+                        articleBody=article.body,
                         articleAuthor=f"{author.first_name} {author.last_name}, {author.school_class}")
 
 

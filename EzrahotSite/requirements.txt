@@ -3,7 +3,7 @@ flask-login
 flask-wtf
 flask-bcrypt
 flask-sqlalchemy
-Flask-Misaka
+Flask-Markdown
 flask_simplemde
 email-validator
-Flask-MDE
+flask-pagedown

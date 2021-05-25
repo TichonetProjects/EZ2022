@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, ValidationError, InputRequired
 from EzrahotSite.models import User
-from flask_mde import MdeField
+from flask_pagedown.fields import PageDownField
 
 class RegistrationForm(FlaskForm):
     first_name = StringField('שם פרטי',
@@ -38,6 +38,5 @@ class SubmitArticle(FlaskForm):
     caption = StringField('כותרת משנה',
                             validators=[DataRequired()]) # must be not empty
     thumbnail = StringField('תמונת כיסוי')
-    body = MdeField('תוכן הכתבה', 
-                    validators=[InputRequired("Input required")]) # must be not empty
+    body = PageDownField('תוכן הכתבה') # must be not empty
     submit = SubmitField('צור כתבה')

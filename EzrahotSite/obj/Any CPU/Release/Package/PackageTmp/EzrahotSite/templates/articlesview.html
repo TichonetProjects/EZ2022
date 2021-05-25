@@ -1,0 +1,35 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+{% for article in articles %}
+<div class="row">
+
+    <div class="column">
+        {% if article.heading %}
+        <strong><h3 style="color:blue;"><a href="/article/{{article.article_id}}">{{article.heading}} ({{article.get_author().first_name}})</a></h3></strong>
+        {%endif%}
+
+        {% if article.caption != "NULL" %}
+        <h5>{{article.caption}}</h5>
+        {%endif%}
+
+        {% if article.body != "NULL" %}
+        <h5>{{article.get_body(50, three_dots=True)}}</h5>
+        {%endif%}
+
+    </div>
+    <div class="column">
+        <br />
+        {%if article.thumbnail != "NULL" %}
+        <img style="width:25%;max-height:30vh;" src="{{article.thumbnail}}" />
+        {%endif%}
+    </div>
+</div>
+{% endfor %}
+
+<div class="page-numbers">
+    {% for index in pages %}
+    <h1><a href="/articles-list/{{index}}"> {{index}} </a></h1>
+    {% endfor %}
+</div>
+{% endblock %}

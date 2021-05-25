@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Eilon\Documents\Github\Demo-Site\EzrahotSite\.\app.publish\</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="EzrahotSite/database.db">
+      <publishTime>05/20/2021 10:41:18</publishTime>
+    </File>
+    <File Include="EzrahotSite/forms.py">
+      <publishTime>05/20/2021 10:41:18</publishTime>
+    </File>
+    <File Include="EzrahotSite/models.py">
+      <publishTime>05/20/2021 10:41:18</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/content/bootstrap.css">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/content/bootstrap.min.css">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/content/site.css">
+      <publishTime>05/11/2021 20:25:15</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/img/404.png">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/img/spiner.png">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/img/Tichonetim.jpg">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/img/WhatsApp Image 2021-04-27 at 17.31.23 %281%29.jpeg">
+      <publishTime>05/11/2021 17:52:00</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/bootstrap.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/bootstrap.min.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery-1.10.2.intellisense.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery-1.10.2.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery-1.10.2.min.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery-1.10.2.min.map">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery.validate-vsdoc.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery.validate.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery.validate.min.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery.validate.unobtrusive.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/modernizr-2.6.2.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/respond.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/respond.min.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/static/scripts/_references.js">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/404.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/about-Backup.html">
+      <publishTime>05/11/2021 20:11:06</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/about.html">
+      <publishTime>05/11/2021 20:16:28</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/articles.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/articlesview.html">
+      <publishTime>04/27/2021 18:19:29</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/contact.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/controlPanel.html">
+      <publishTime>05/11/2021 17:52:00</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/covid-19.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/devteam.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/error.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/index.html">
+      <publishTime>05/11/2021 17:51:28</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/layout.html">
+      <publishTime>05/20/2021 10:41:18</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/login.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/news.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/profile.html">
+      <publishTime>05/11/2021 19:54:16</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/register.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/Sub1.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/Sub2.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/Sub3.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/submitArticle.html">
+      <publishTime>05/20/2021 10:41:18</publishTime>
+    </File>
+    <File Include="EzrahotSite/templates/weekend.html">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="EzrahotSite/views.py">
+      <publishTime>05/20/2021 10:41:18</publishTime>
+    </File>
+    <File Include="EzrahotSite/__init__.py">
+      <publishTime>05/11/2021 19:14:04</publishTime>
+    </File>
+    <File Include="requirements.txt">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+    <File Include="runserver.py">
+      <publishTime>04/06/2021 16:39:13</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
