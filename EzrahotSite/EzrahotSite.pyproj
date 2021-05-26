@@ -46,6 +46,7 @@
   <ItemGroup>
     <Content Include="EzrahotSite\database.db" />
     <Content Include="EzrahotSite\static\img\404.png" />
+    <Content Include="EzrahotSite\static\img\homepage.jpg" />
     <Content Include="EzrahotSite\static\img\spiner.png" />
     <Content Include="EzrahotSite\static\img\Tichonetim.jpg" />
     <Content Include="EzrahotSite\static\img\WhatsApp Image 2021-04-27 at 17.31.23 %281%29.jpeg" />
@@ -61,10 +62,7 @@
     <Content Include="EzrahotSite\templates\submitArticle.html" />
     <Content Include="EzrahotSite\templates\news.html" />
     <Content Include="EzrahotSite\templates\devteam.html" />
-    <Content Include="EzrahotSite\templates\Sub1.html" />
     <Content Include="EzrahotSite\templates\weekend.html" />
-    <Content Include="EzrahotSite\templates\Sub2.html" />
-    <Content Include="EzrahotSite\templates\Sub3.html" />
     <Content Include="requirements.txt" />
     <Content Include="EzrahotSite\static\content\bootstrap.css" />
     <Content Include="EzrahotSite\static\content\bootstrap.min.css" />

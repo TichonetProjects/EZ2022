@@ -205,13 +205,16 @@ nav {
 .box {
     display: flex;
     align-items: flex-end;
-   
+    width: 65vw;
+    margin-right: -64%;
+    margin-top: 10px;
 }
 .topics {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 7vw;
 }
 .grid-continer {
     display: grid;
