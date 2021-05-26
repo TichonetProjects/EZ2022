@@ -128,7 +128,8 @@ class Article(db.Model):
 
     def get_all_user(author):
         """return all articles by a specific author"""
-        return Article.query.filter_by(author_id=author)
+        user = User.query.filter_by(user_id=author).first()
+        return Article.query.filter_by(author_id=author) if not user.is_admin() else Article.get_all_articles()
 
     def accept_article(self):
         """accepts article and commits to db"""
