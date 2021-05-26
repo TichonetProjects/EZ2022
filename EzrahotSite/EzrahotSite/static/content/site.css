@@ -213,8 +213,8 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 7vw;
+    align-items: flex-start;
+    width: 15vw;
 }
 .grid-continer {
     display: grid;
