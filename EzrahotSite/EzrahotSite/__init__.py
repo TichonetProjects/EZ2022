@@ -9,7 +9,7 @@ from flask_bcrypt import Bcrypt
 from flaskext.markdown import Markdown
 from flask_pagedown import PageDown
 from flask_mail import Mail
-
+from flask_mde import Mde
 
 app = Flask(__name__)
 
@@ -34,6 +34,8 @@ bcrypt = Bcrypt(app)
 md = Markdown(app, safe_mode=True)
 
 pagedown = PageDown(app)
+
+mde = Mde(app)
 
 mail = Mail(app)
 
