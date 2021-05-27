@@ -8,6 +8,7 @@ from flask_login import current_user
 from functools import wraps
 from flask import request, redirect, url_for, flash
 from flask_mail import Message
+import string
 
 
 @login_manager.user_loader

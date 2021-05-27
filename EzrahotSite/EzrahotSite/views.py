@@ -14,6 +14,7 @@ from EzrahotSite.models import User, Article, admin_required, clean_string, acce
 from EzrahotSite.forms import RegistrationForm, LoginForm, SubmitArticle
 
 from flask_mail import Mail, Message
+import math
 
 
 @app.route('/')
@@ -37,7 +38,7 @@ def articlesview(index=1):
     index = int(index)-1
     articles_in_page = 5
     acceptedArticles = list(Article.get_all_accepted())
-    pages_count = int(len(acceptedArticles)/articles_in_page) + 1
+    pages_count = math.ceil(len(acceptedArticles)/articles_in_page)
 
     return render_template(
         'articlesview.html',
@@ -159,6 +160,7 @@ def editArticle(index):
 
     if form.validate_on_submit():
         article.heading = clean_string(form.heading.data)
+        # article.is_english = form.is_english.data
         article.body = clean_string(form.body.data)
         article.caption = clean_string(form.caption.data)
         article.thumbnail = clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no"
@@ -189,6 +191,7 @@ def createArticle():
             post_date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
             accept_date=None,
             is_accepted=False,
+            # is_english=form.is_engish.data,
             author_id=current_user.get_id(),
             caption=clean_string(form.caption.data),
             thumbnail=clean_string(form.thumbnail.data) if clean_string(form.thumbnail.data) else "https://lh5.googleusercontent.com/p/AF1QipMF1XVDYrw7O7mg3E_fLqgAceacWExqaP4rbptz=s435-k-no")
@@ -290,7 +293,8 @@ def articles(index):
                         title=article.heading,
                         article=article,
                         articleBody=article.body,
-                        articleAuthor=f"{author.first_name} {author.last_name}, {author.school_class}")
+                        articleAuthor=f"{author.first_name} {author.last_name}, {author.school_class}"
+                        , direction ="ltr" if article.article_id == 24 else"rtl")
 
 
 @app.errorhandler(404)
