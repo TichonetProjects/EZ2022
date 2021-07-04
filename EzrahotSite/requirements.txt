@@ -1,7 +1,10 @@
-Flask~=1.1
+Flask
 flask-login
 flask-wtf
 flask-bcrypt
 flask-sqlalchemy
 email-validator
 Flask-SimpleMDE
+Flask-Markdown
+flask_mail
+flask_mde
