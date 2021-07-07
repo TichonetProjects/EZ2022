@@ -8,3 +8,5 @@ Flask-SimpleMDE
 Flask-Markdown
 flask_mail
 flask_mde
+flask_pagedown
+flask_ext
