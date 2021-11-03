@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\EzrahotSite",
+    "\\EzrahotSite\\EzrahotSite"
   ],
+  "SelectedNode": "\\EzrahotSite\\EzrahotSite\\__init__.py",
   "PreviewInSolutionExplorer": false
 }

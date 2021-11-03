@@ -1,0 +1,80 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+<h1 style="text-align:center; font-size:35pt;">{{home_paragraph}}</h1>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+
+        {% for n in range(len) %}
+        <li data-target="#myCarousel" data-slide-to="{{n}}"></li>
+        {% endfor%}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="{{articles[0].thumbnail}}">
+        </div>
+
+        {% for article in articles[1:] %}
+        <div class="item">
+            <img src="{{article.thumbnail}}">
+        </div>
+        {% endfor%}
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="grid-continer">
+    <div class="topics">
+        <h2 style="font-size:30pt;">נושאים:</h2>
+        <ul style="font-size:12pt;">
+            <li>סחר בבני אדם</li>
+            <li>משבר האקלים</li>
+            <li>זכויות בעלי חיים</li>
+            <li>עובדים זרים</li>
+            <li>אפלייה</li>
+            <li>סדרי עדיפיויות</li>
+            <li>זכויות אדם במשבר</li>
+        </ul>
+    </div>
+    <div class="box" style="align-content:center; direction:rtl;">
+        <h3 style="font-size: 13pt; direction:rtl;">
+            <br />
+            עבדול נאסיר עבר יותר מחודש של התגנבות
+            <br />
+            דרך גבולות אפגניסטן ואיראן כדי להגיע
+            <br />
+            לססמה, עיירת חוף טורקית קטנה במרחק שחייה מיוון.
+            <br />
+            אבל כשהצעיר בן ה-22 רעד מקור,
+            <br />
+            במים בבוקר של דצמבר,
+            <br />
+            מאות המטרים האחרונים נראו בלתי אפשריים.
+            <br />
+            המים היו קרים,
+            <br />
+            הרוחות חזקות,
+            <br />
+            והמבריחים שקיבלו ממנו 800 דולר תמורת מקום על סירה נעלמו.
+        </h3>
+        <img src="../static/img/palit.jpg/" ; width="400" height="300">
+
+    </div>
+</div>
+    {% endblock %}

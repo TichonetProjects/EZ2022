@@ -1,0 +1,258 @@
+html{
+    font-size: 100% !important;
+}
+* {
+    box-sizing:border-box;
+}
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    direction: rtl;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.main-div {
+    position: relative;
+    width: 99vw;
+    height: 90vh;
+}
+
+.spinner {
+    height: 250px;
+    width: 250px;
+    animation: spin 5s linear infinite;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.articleBody img {
+    height: 40%;
+    width: 40%;
+}
+footer{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+}
+footer p{
+    color:black;
+}
+.devteam {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "gad eilon" 
+                         "yarom ilay";
+}
+.home-continer img{
+    margin-top:-430px;
+}
+a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #3399ff;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: blue;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    height: 33.33%;
+    padding: 5px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+    display: flex;
+    align-items: center;
+}
+
+topnav {
+    overflow: hidden;
+    background-color: #f1f1f1;
+
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-right: 3px solid blue;
+}
+
+    .topnav a:hover {
+        border-bottom: 3px solid red;
+    }
+
+    .topnav a.active {
+        border-bottom: 3px solid red;
+    }
+    .topnav a.last {
+        border-right: 3px solid blue;
+    }
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+body {
+    direction: rtl;
+}
+nav {
+    direction: rtl;
+}
+    nav.navbar-nav {
+        list-style-type: none;
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+.nav.navbar-nav li {
+    float: right;
+    margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+    .nav .navbar-nav {
+        color: red;
+    }
+}
+
+.box {
+    display: flex;
+    align-items: flex-end;
+   
+}
+.topics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.grid-continer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "box topics";
+}
+.carousel-inner > .item > img {
+    width: 100%;
+    height: 100%;
+}
+.carousel{
+    height: 50%;
+}
+.control-btn{
+    display: flex;
+    font-size: 12pt;
+    text-align: center;
+}
+.page-numbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-numbers h1 {
+    font-size: 16pt;
+    margin-left: 5px;
+}
+.btn-outline-info {
+    border-color: #0000FF !important;
+    color: #0000FF !important;
+}
+.btn-outline-info:hover {
+    background-color: #FFFF00 !important;
+}
+.modal {
+    position: absolute !important;
+    top: 10px !important;
+    right: 100px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 10040 !important;
+    overflow: auto !important;
+    overflow-y: auto !important;
+}

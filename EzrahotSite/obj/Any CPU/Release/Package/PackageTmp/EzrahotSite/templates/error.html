@@ -1,0 +1,11 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="direction:rtl;" class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+
+<button style="direction:rtl;" class="btn btn-primary" onclick="window.history.go(-1);">בחזרה</button>
+
+{% endblock %}
