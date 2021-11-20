@@ -8,6 +8,7 @@ from flask_login import current_user
 from functools import wraps
 from flask import request, redirect, url_for, flash
 from flask_mail import Message
+import string
 
 
 @login_manager.user_loader
@@ -128,7 +129,8 @@ class Article(db.Model):
 
     def get_all_user(author):
         """return all articles by a specific author"""
-        return Article.query.filter_by(author_id=author)
+        user = User.query.filter_by(user_id=author).first()
+        return Article.query.filter_by(author_id=author) if not user.is_admin() else Article.get_all_articles()
 
     def accept_article(self):
         """accepts article and commits to db"""
@@ -146,7 +148,7 @@ class Article(db.Model):
 def acceptArticleMessage(article):
     """find the article author and create a new message object. fill the message object with a predefined template with the author's credentials"""
     article_author = article.get_author()
-    message = Message(f"הכתבה שלך אושרה! {article.heading}", sender="ezrahotsite@gmail.com", recipients=[article_author.email])
+    message = Message(f"הכתבה שלך אושרה! {article.heading}", sender="noreply@tichonet.co.il", recipients=[article_author.email])
     
     message.body = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחצו כאן {}.'.format(article.heading, article.get_url())
     message.html = 'הכתבה שלך "{}" אושרה על ידי מנהלי המערכת!\n\n כדי לראות את הכתבה לחצו כאן {}.'.format(article.heading, article.get_url())
@@ -156,7 +158,7 @@ def acceptArticleMessage(article):
 """creates an email message to notify a user that they have been accepted to the user system"""
 def acceptUserMessage(user):
     """create a new message object and fill it with a predefined template with the user's credentials"""
-    message = Message(f"המשתמש שלך אושר!", sender="ezrahotsite@gmail.com", recipients=[user.email])
+    message = Message(f"המשתמש שלך אושר!", sender="noreply@tichonet.co.il", recipients=[user.email])
     
     message.body = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.co.il/login")
     message.html = 'היי {}, המשתמש שלך באתר האזרחות של תיכונט אושר על ידי מנהלי המערכת! כדי להיכנס למערכת לחצו כאן {}.'.format(user.first_name, "tichonet.co.il/login")
@@ -166,7 +168,7 @@ def acceptUserMessage(user):
 """creates an email message to notify an admin that a new user has registered"""
 def newUserMessage(user):
     """create a new message object and fill it with a predefined template with the user's credentials"""
-    message = Message(f"משתמש חדש מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[user.email for user in User.get_all_admins()])
+    message = Message(f"משתמש חדש מחכה לאישור!", sender="noreply@tichonet.co.il", recipients=[user.email for user in User.get_all_admins()])
     
     message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.co.il/acceptuser/{user.user_id}")
     message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.co.il/acceptuser/{user.user_id}")
@@ -176,7 +178,7 @@ def newUserMessage(user):
 """creates an email message to notify an admin that new article has been created"""
 def newArticleMessage(article):
     """find the article author and create a new message object. fill the message object with a predefined template with the author's credentials"""
-    message = Message(f"כתבה חדשה מחכה לאישור!", sender="ezrahotsite@gmail.com", recipients=[user.email for user in User.get_all_admins()])
+    message = Message(f"כתבה חדשה מחכה לאישור!", sender="noreply@tichonet.co.il", recipients=[user.email for user in User.get_all_admins()])
     
     article_author = article.get_author()
 
