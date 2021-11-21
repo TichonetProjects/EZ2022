@@ -168,8 +168,8 @@ def acceptUserMessage(user):
 """creates an email message to notify an admin that a new user has registered"""
 def newUserMessage(user):
     """create a new message object and fill it with a predefined template with the user's credentials"""
-    message = Message(f"משתמש חדש מחכה לאישור!", sender="noreply@tichonet.co.il", recipients=[user.email for user in User.get_all_admins()])
-    
+    """message = Message(f"משתמש חדש מחכה לאישור!", sender="noreply@tichonet.co.il", recipients=[user.email for user in User.get_all_admins()])"""
+    message = Message(f"משתמש חדש מחכה לאישור!", sender="noreply@tichonet.co.il", recipients=["benkelson7@gmail.com"])
     message.body = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.co.il/acceptuser/{user.user_id}")
     message.html = 'המשתמש "{}" מחכה לאישור המערכת. לחצו כאן כדי לאשר {}.'.format(user.get_full_name(), f"tichonet.co.il/acceptuser/{user.user_id}")
 
