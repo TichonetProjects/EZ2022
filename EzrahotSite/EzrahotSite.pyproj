@@ -17,7 +17,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>EzrahotSite</Name>
     <RootNamespace>EzrahotSite</RootNamespace>
-    <InterpreterId>MSBuild|ezrahut|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|EZ2022_env|$(MSBuildProjectFullPath)</InterpreterId>
     <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -92,10 +92,10 @@
     <Content Include="EzrahotSite\templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="ezrahut\">
-      <Id>ezrahut</Id>
+    <Interpreter Include="EZ2022_env\">
+      <Id>EZ2022_env</Id>
       <Version>3.9</Version>
-      <Description>ezrahut (Python 3.9 (64-bit))</Description>
+      <Description>EZ2022_env (Python 3.9 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
