@@ -56,6 +56,13 @@ def contact():
         message='Your contact page.'
     )
 
+
+@app.route('/OriginalSchoolSite')
+def OriginalSchoolSite():
+    """renders the contact page."""
+    return redirect('http://www.tichonet.com')
+
+
 @app.route('/devteam')
 def devteam():
     """renders the dev team page"""

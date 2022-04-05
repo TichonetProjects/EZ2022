@@ -47,7 +47,8 @@
                     <img src="../static/img/WhatsApp Image 2021-04-27 at 17.31.23 (1).jpeg" width="50px" style="margin-left: -25%; cursor:pointer;" onclick="window.location.href = '/';" />
                     <td><a href="{{ url_for('home') }}"><strong style="color:blue">בית</strong></a></td>
                     <td><a href="{{ url_for('articlesview') }}"><strong style="color:blue">כתבות</strong></a></td>
-                    <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור קשר</strong></a></td>
+                    <td><a href="{{ url_for('contact') }}"><strong style="color:blue">צור fשר</strong></a></td>
+                    <td><a href="{{ url_for('OriginalSchoolSite') }}"><strong style="color:blue">לאתר בית הספר</strong></a></td>
 
                     {% if current_user.is_authenticated %}
                     {% if current_user.is_admin() %}
@@ -59,6 +60,7 @@
                     <td><a href="{{ url_for('login') }}"><strong style="color:blue">כניסה</strong></a></td>
                     <td><a href="{{ url_for('register') }}"><strong style="color:blue">הרשמה</strong></a></td>
                     {% endif %}
+
                     
                 </tr>
             </table>
