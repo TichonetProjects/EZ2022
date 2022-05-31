@@ -50,7 +50,7 @@
     <Content Include="EzrahotSite\static\img\homepage.jpg" />
     <Content Include="EzrahotSite\static\img\spiner.png" />
     <Content Include="EzrahotSite\static\img\Tichonetim.jpg" />
-    <Content Include="EzrahotSite\static\img\WhatsApp Image 2021-04-27 at 17.31.23 %281%29.jpeg" />
+    <Content Include="EzrahotSite\static\img\pic1.jpeg" />
     <Content Include="EzrahotSite\templates\404.html" />
     <Content Include="EzrahotSite\templates\articles.html" />
     <Content Include="EzrahotSite\templates\articlesview.html" />
