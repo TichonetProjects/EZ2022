@@ -73,7 +73,7 @@ def register():
     """renders the registration page"""
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    
+    dgfdffgfgdg
     form = RegistrationForm()
     if form.validate_on_submit():
         """whenever the form is submitted, enter the credentials into the database and hash the password""" 
